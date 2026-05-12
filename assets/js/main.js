@@ -1,6 +1,7 @@
 import { Header } from "./header.js";
 import { Footer } from "./footer.js";
 import { initTallyCounters } from "./tally.js";
+import { initDonationModal } from "./donation-modal.js";
 
 const activePage = document.body.dataset.page || "";
 
@@ -16,3 +17,5 @@ if (footerTarget) {
 }
 
 initTallyCounters();
+
+initDonationModal();

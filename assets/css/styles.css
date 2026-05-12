@@ -476,6 +476,112 @@ button:hover {
   background: var(--bg);
 }
 
+.payment-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.payment-card {
+  display: grid;
+  align-content: start;
+  justify-items: center;
+  text-align: center;
+}
+
+.payment-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  min-height: 58px;
+  margin-bottom: 1rem;
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--accent-dark);
+  font-weight: 800;
+}
+
+.payment-actions {
+  display: grid;
+  gap: 0.75rem;
+  width: 100%;
+  margin-top: 0.75rem;
+}
+
+.check-donation {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 1.5rem;
+  align-items: start;
+  max-width: 900px;
+  margin: 1.5rem auto 0;
+}
+
+.check-details {
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+}
+
+.check-details p:last-child {
+  margin-bottom: 0;
+}
+
+.donation-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(36, 49, 66, 0.58);
+}
+
+.donation-modal.is-open {
+  display: flex;
+}
+
+.donation-modal-content {
+  position: relative;
+  width: min(100%, 420px);
+  padding: 2rem;
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 60px rgba(36, 49, 66, 0.22);
+  text-align: center;
+}
+
+.donation-modal-content img {
+  width: min(100%, 260px);
+  margin: 1rem auto;
+  border-radius: var(--radius-sm);
+}
+
+.modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 40px;
+  min-height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
 .contact-list {
   display: grid;
   gap: 0.85rem;
@@ -585,6 +691,8 @@ textarea {
   .hero-inner,
   .split,
   .donate-box,
+  .payment-grid,
+  .check-donation,
   .footer-inner,
   .gallery-preview,
   .gallery-grid,
