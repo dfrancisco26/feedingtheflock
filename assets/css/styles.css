@@ -234,15 +234,44 @@ button:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  min-height: 76px;
+  gap: 1.25rem;
+  min-height: 92px;
 }
 
 .logo,
 .site-title {
-  font-size: 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-size: clamp(1.25rem, 2vw, 1.55rem);
   font-weight: 800;
   color: var(--text);
+}
+
+.logo-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  flex: 0 0 64px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--accent-light);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.logo-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.logo-text {
+  display: inline-block;
+  line-height: 1.1;
 }
 
 .nav-list {
@@ -313,8 +342,71 @@ button:hover {
   gap: 1.25rem;
 }
 
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.services-grid .info-card {
+  min-height: 190px;
+}
+
 .info-card h3 {
   margin-bottom: 0.75rem;
+}
+
+.tally-section {
+  overflow: hidden;
+}
+
+.tally-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.tally-card {
+  min-height: 180px;
+  padding: 1.75rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+
+.tally-card:nth-child(2) {
+  transition-delay: 90ms;
+}
+
+.tally-card:nth-child(3) {
+  transition-delay: 180ms;
+}
+
+.tally-section.is-visible .tally-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tally-number {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.tally-card p {
+  max-width: 28ch;
+  margin-inline: auto;
+  margin-bottom: 0;
 }
 
 .band {
@@ -489,12 +581,14 @@ textarea {
   .grid-3,
   .grid-4,
   .info-cards,
+  .services-grid,
   .hero-inner,
   .split,
   .donate-box,
   .footer-inner,
   .gallery-preview,
-  .gallery-grid {
+  .gallery-grid,
+  .tally-grid {
     grid-template-columns: 1fr;
   }
 
@@ -524,6 +618,20 @@ textarea {
 @media (max-width: 640px) {
   body {
     font-size: 15px;
+  }
+
+  .logo {
+    gap: 0.6rem;
+  }
+
+  .logo-mark {
+    width: 48px;
+    height: 48px;
+    flex-basis: 48px;
+  }
+
+  .logo-text {
+    font-size: 1.1rem;
   }
 
   .section {

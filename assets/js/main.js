@@ -1,5 +1,6 @@
 import { Header } from "./header.js";
 import { Footer } from "./footer.js";
+import { initTallyCounters } from "./tally.js";
 
 const activePage = document.body.dataset.page || "";
 
@@ -13,3 +14,5 @@ if (headerTarget) {
 if (footerTarget) {
   footerTarget.innerHTML = Footer();
 }
+
+initTallyCounters();

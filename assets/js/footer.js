@@ -3,10 +3,14 @@ export function Footer() {
     <footer class="site-footer">
       <div class="container footer-inner">
         <div>
-          <p class="logo">Feeding the Flock</p>
+          <span class="logo-mark" aria-hidden="true">
+            <img src="/images/logo_2026.png" alt="" class="logo-icon" />
+          </span>
           <p class="small">
-            Placeholder footer text describing the organization and its community focus.
-          </p>
+          Feeding the Flock SD is a registered 501(c)(3) nonprofit organization.
+          Contributions may be tax deductible to the extent allowed by law.
+          EIN: XX-XXXXXXX
+</p>
         </div>
 
         <div>

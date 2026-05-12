@@ -3,7 +3,9 @@ export function Header(activePage = "") {
     <header class="site-header">
       <div class="container header-inner">
         <a href="index.html" class="logo">
-          <span class="logo-mark" aria-hidden="true"></span>
+          <span class="logo-mark" aria-hidden="true">
+            <img src="/images/logo_2026.png" alt="" class="logo-icon" />
+          </span>
           <span class="logo-text">Feeding the Flock SD</span>
         </a>
 
