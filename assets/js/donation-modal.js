@@ -1,21 +1,23 @@
 
 
 const donationOptions = {
+  /*
   zelle: {
     title: "Zelle",
-    qrSrc: "assets/images/zelle-qr-placeholder.png",
+    qrSrc: "/images/zelle_qr.jpeg",
     link: "#",
     linkText: "Open Zelle",
   },
+  */
   paypal: {
     title: "PayPal",
-    qrSrc: "assets/images/paypal-qr-placeholder.png",
+    qrSrc: "/images/paypal_qr.jpeg",
     link: "#",
     linkText: "Open PayPal",
   },
   venmo: {
     title: "Venmo",
-    qrSrc: "assets/images/venmo-qr-placeholder.png",
+    qrSrc: "/images/venmo_qr.jpeg",
     link: "#",
     linkText: "Open Venmo",
   },
