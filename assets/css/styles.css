@@ -476,6 +476,104 @@ button:hover {
   background: var(--bg);
 }
 
+.donate-method p:last-child {
+  margin-bottom: 0;
+}
+
+.contact-start {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.contact-start-copy {
+  display: grid;
+  gap: 1.15rem;
+}
+
+.contact-start-copy h2,
+.contact-start-copy p {
+  margin-bottom: 0;
+}
+
+.contact-info-photo {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+.contact-info-photo img {
+  width: 100%;
+  border-radius: 0;
+}
+
+.contact-primary-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.25rem;
+  padding-top: 0.25rem;
+}
+
+.contact-primary-list p {
+  margin-bottom: 0;
+}
+
+.contact-organization {
+  grid-column: 1 / -1;
+  text-align: center;
+}
+
+.contact-organization .email-link {
+  justify-content: center;
+}
+
+.email-link {
+  display: inline-flex;
+  align-items: center;
+  overflow-wrap: anywhere;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.18em;
+}
+
+.contact-social-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  max-width: 420px;
+  margin-top: 1.25rem;
+}
+
+.contact-social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 70px;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 700;
+}
+
+.contact-social-links a:hover,
+.contact-social-links a:focus-visible {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  color: var(--accent-dark);
+}
+
+.social-logo-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 0;
+}
+
 .payment-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -493,15 +591,23 @@ button:hover {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 120px;
-  min-height: 58px;
+  width: 190px;
+  height: 82px;
   margin-bottom: 1rem;
-  padding: 0.65rem 1rem;
+  padding: 0.75rem 1rem;
   border-radius: var(--radius-md);
   border: 1px solid var(--border);
   background: var(--surface-2);
   color: var(--accent-dark);
   font-weight: 800;
+}
+
+.payment-logo img {
+  display: block;
+  width: 132px;
+  height: 42px;
+  object-fit: contain;
+  border-radius: 0;
 }
 
 .payment-actions {
@@ -691,6 +797,7 @@ textarea {
   .hero-inner,
   .split,
   .donate-box,
+  .contact-start,
   .payment-grid,
   .check-donation,
   .footer-inner,
@@ -749,6 +856,11 @@ textarea {
   .card,
   .donate-box {
     padding: 1.25rem;
+  }
+
+  .contact-primary-list,
+  .contact-social-links {
+    grid-template-columns: 1fr;
   }
 
   .hero-actions,

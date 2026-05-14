@@ -8,8 +8,8 @@ export function Footer() {
           </span>
           <p class="small">
           Feeding the Flock SD is a registered 501(c)(3) nonprofit organization.
-          Contributions may be tax deductible to the extent allowed by law.
-          EIN: XX-XXXXXXX
+          Contributions may be tax deductible.
+          EIN: 99-2671065
 </p>
         </div>
 
