@@ -824,6 +824,10 @@ textarea {
     padding-top: 3.5rem;
   }
 
+  body[data-page="home"] .hero-panel {
+    order: -1;
+  }
+
   .hero-panel img,
   .split-media img,
   .split-media .media-box {
