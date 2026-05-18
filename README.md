@@ -1,122 +1,56 @@
 Feeding the Flock SD Website
+============================
 
-Static website for Feeding the Flock SD.
+Static multi-page site for Feeding the Flock SD.
 
-⸻
+Project Structure
+-----------------
 
-Development Checklist
+- `index.html` - Homepage
+- `about.html` - About, programs, locations, partners, and gallery
+- `donate.html` - Donation methods and donation QR modal
+- `contact.html` - Contact information and social links
 
-Core Site Structure
+Shared Assets
+-------------
 
-* Create homepage
-* Create About page
-* Create Donate page
-* Create Contact page
-* Shared JavaScript header component
-* Shared JavaScript footer component
-* Shared main.js loader
-* Responsive navigation
-* Add logo support to header
+- `assets/css/styles.css` - Global styles for all pages
+- `assets/js/main.js` - Shared page bootstrapping (header/footer/tally/modal/calendar)
+- `assets/js/header.js` - Shared header/nav component
+- `assets/js/footer.js` - Shared footer component
+- `assets/js/tally.js` - Home page animated impact counters
+- `assets/js/donation-modal.js` - Donate page QR modal behavior
+- `assets/js/events-calendar.js` - Calendar logic kept in repo for future reuse
 
-⸻
+Current Behavior
+----------------
 
-Content and Copy
+- Header and footer are injected on each page from shared JS.
+- Primary navigation includes Home, About, Food Help and Events, Donate, and Contact.
+- Donation page supports PayPal and Venmo links and QR modal actions.
+- Zelle donation block is intentionally commented out in `donate.html`.
 
-* Rewrite homepage copy to sound more human
-* Add ministry support language for Mexico outreach
-* Rewrite About page with clearer operational details
-* Add donation page content
-* Add contact page content
-* Final copy review with charity leadership
-* Tighten and shorten long sections
-* Add official mission statement if desired
+Configuration Notes
+-------------------
 
-⸻
+- Event page is currently disabled and `events.html` has been removed.
 
-Programs and Services
+Run Locally
+-----------
 
-* Add drive-through food distribution details
-* Add volunteer-packed food box descriptions
-* Add ministry support in Mexico
-* Expand services section to include senior pantry
-* Expand services section to include emergency pantry
-* Add school partnership / student food support section
-* Add clearer San Diego Food Bank partnership wording
-* Add distribution schedules or process details if approved
+From the project root:
 
-⸻
+```bash
+python3 -m http.server 8000
+```
 
-Visuals and Branding
+Then open:
 
-* Update site color palette to match logo
-* Add image placeholder sections
-* Replace placeholder images with real photos
-* Add favicon
-* Improve spacing and typography consistency
-* Add hover states and small animation polish
-* Add partner / sponsor logo section
-* Add subtle animated statistics section
-* Create animated counters for:
-    * Meals served to date
-    * Meals served this month
-    * Families served
-    * Volunteers involved
+- `http://localhost:8000/`
 
-⸻
+Outstanding Cleanup (Optional)
+------------------------------
 
-Donation System
-
-* Add real PayPal link
-* Add real Venmo link
-* Generate PayPal QR code
-* Generate Venmo QR code
-* Add mailing address for checks
-* Add recipient/payable name
-* Add social media links
-
-⸻
-
-Contact Information
-
-* Add real email address
-* Add real phone number
-* Add direct contact people
-* Add mailing address / PO box
-* Add social media accounts
-
-⸻
-
-Technical Cleanup
-
-* Audit CSS for duplicate styles
-* Remove inline styles
-* Optimize image sizes
-* Test all navigation links
-* Test responsive/mobile layout
-* Test accessibility and contrast
-* Verify all pages use shared header/footer
-* Add Open Graph metadata
-* Add SEO description cleanup
-
-⸻
-
-Deployment
-
-* Initialize Git repository
-* Push project to GitHub
-* Connect repository to Cloudflare Pages
-* Configure custom domain
-* Final pre-launch review
-* Launch site
-
-⸻
-
-Future Ideas
-
-* Volunteer signup form
-* Event calendar
-* Distribution announcement banner
-* Photo gallery lightbox
-* Testimonials or stories section
-* Newsletter signup
-* Multi-language support
+- Remove inline styles currently in `donate.html`.
+- Replace remaining placeholder alt text where needed.
+- Add favicon and Open Graph metadata.

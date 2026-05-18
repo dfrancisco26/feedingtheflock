@@ -2,6 +2,7 @@ import { Header } from "./header.js";
 import { Footer } from "./footer.js";
 import { initTallyCounters } from "./tally.js";
 import { initDonationModal } from "./donation-modal.js";
+import { initEventsCalendar } from "./events-calendar.js";
 
 const activePage = document.body.dataset.page || "";
 
@@ -19,3 +20,5 @@ if (footerTarget) {
 initTallyCounters();
 
 initDonationModal();
+
+initEventsCalendar();

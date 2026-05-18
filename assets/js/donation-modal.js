@@ -12,13 +12,13 @@ const donationOptions = {
   paypal: {
     title: "PayPal",
     qrSrc: "/images/paypal_qr.jpeg",
-    link: "#",
+    link: "https://paypal.me/debrasuechilders",
     linkText: "Open PayPal",
   },
   venmo: {
     title: "Venmo",
     qrSrc: "/images/venmo_qr.jpeg",
-    link: "#",
+    link: "https://account.venmo.com/u/feedingtheflock",
     linkText: "Open Venmo",
   },
 };
