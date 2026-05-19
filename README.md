@@ -8,6 +8,7 @@ Project Structure
 
 - `index.html` - Homepage
 - `about.html` - About, programs, locations, partners, and gallery
+- `events.html` - Food Help and Events page with upcoming events and monthly calendar
 - `donate.html` - Donation methods and donation QR modal
 - `contact.html` - Contact information and social links
 
@@ -20,20 +21,23 @@ Shared Assets
 - `assets/js/footer.js` - Shared footer component
 - `assets/js/tally.js` - Home page animated impact counters
 - `assets/js/donation-modal.js` - Donate page QR modal behavior
-- `assets/js/events-calendar.js` - Calendar logic kept in repo for future reuse
+- `assets/js/events-calendar.js` - Events data and calendar rendering
 
 Current Behavior
 ----------------
 
 - Header and footer are injected on each page from shared JS.
 - Primary navigation includes Home, About, Food Help and Events, Donate, and Contact.
+- Events calendar shows one month at a time with previous/next month controls.
+- Upcoming events excludes weekly recurring events and shows non-weekly upcoming items.
 - Donation page supports PayPal and Venmo links and QR modal actions.
 - Zelle donation block is intentionally commented out in `donate.html`.
 
 Configuration Notes
 -------------------
 
-- Event page is currently disabled and `events.html` has been removed.
+- Food box request buttons on `events.html` are controlled by:
+  - `foodBoxFormUrl` in `assets/js/events-calendar.js`
 
 Run Locally
 -----------

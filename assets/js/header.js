@@ -13,6 +13,7 @@ export function Header(activePage = "") {
           <ul class="nav-list">
             <li><a href="index.html" class="${activePage === "home" ? "active" : ""}">Home</a></li>
             <li><a href="about.html" class="${activePage === "about" ? "active" : ""}">About</a></li>
+            <li><a href="events.html" class="${activePage === "events" ? "active" : ""}">Food Help & Events</a></li>
             <li><a href="donate.html" class="${activePage === "donate" ? "active" : ""}">Donate</a></li>
             <li><a href="contact.html" class="${activePage === "contact" ? "active" : ""}">Contact</a></li>
           </ul>

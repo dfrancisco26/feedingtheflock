@@ -53,7 +53,7 @@ const eventSources = [
   },
 ];
 
-const foodBoxFormUrl = "contact.html";
+const foodBoxFormUrl = "https://m.signupgenius.com/#!/showSignUp/10C0D4DAEAF28AAF9C52-63943411-lamesa";
 
 const calendarWindow = {
   monthsBack: 0,

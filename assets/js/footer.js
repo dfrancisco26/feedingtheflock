@@ -17,6 +17,7 @@ export function Footer() {
           <nav class="footer-nav" aria-label="Footer navigation">
             <a href="index.html">Home</a>
             <a href="about.html">About</a>
+            <a href="events.html">Food Help & Events</a>
             <a href="donate.html">Donate</a>
             <a href="contact.html">Contact</a>
           </nav>
