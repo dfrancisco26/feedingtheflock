@@ -1,0 +1,73 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Active nav key: home | about | events | donate | contact */
+  page?: string;
+  /** Path to the social-share image, relative to the site root. */
+  ogImage?: string;
+}
+
+const {
+  title,
+  description,
+  page = "",
+  ogImage = "/images/photos/IMG_2255.JPG",
+} = Astro.props;
+
+// Absolute URLs for social/canonical tags (falls back gracefully if `site` is unset).
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(ogImage, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="icon" type="image/png" href="/images/logo_2026.png" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Feeding the Flock SD" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+  </head>
+
+  <body data-page={page}>
+    <Header page={page} />
+
+    <main>
+      <slot />
+    </main>
+
+    <Footer />
+
+    <script>
+      // Progressive enhancement — each init no-ops if its markup is absent,
+      // so it is safe to run all three on every page.
+      import { initTallyCounters } from "../scripts/tally.js";
+      import { initDonationModal } from "../scripts/donation-modal.js";
+      import { initEventsCalendar } from "../scripts/events-calendar.js";
+
+      initTallyCounters();
+      initDonationModal();
+      initEventsCalendar();
+    </script>
+  </body>
+</html>

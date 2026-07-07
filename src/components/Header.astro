@@ -1,0 +1,41 @@
+---
+// Site header + primary navigation.
+// `page` marks the active nav item (matches the old data-page values).
+interface Props {
+  page?: string;
+}
+const { page = "" } = Astro.props;
+
+const navLinks = [
+  { href: "/", label: "Home", key: "home" },
+  { href: "/about.html", label: "About", key: "about" },
+  { href: "/events.html", label: "Food Help & Events", key: "events" },
+  { href: "/donate.html", label: "Donate", key: "donate" },
+  { href: "/contact.html", label: "Contact", key: "contact" },
+];
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <img src="/images/logo_2026.png" alt="" class="logo-icon" />
+      </span>
+      <span class="logo-text">Feeding the Flock SD</span>
+    </a>
+
+    <nav aria-label="Primary navigation">
+      <ul class="nav-list">
+        {
+          navLinks.map((link) => (
+            <li>
+              <a href={link.href} class={page === link.key ? "active" : undefined}>
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>

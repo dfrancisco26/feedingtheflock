@@ -1,0 +1,17 @@
+{
+  "name": "feeding-the-flock-sd",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Feeding the Flock SD website — Astro static site",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.13.0"
+  }
+}

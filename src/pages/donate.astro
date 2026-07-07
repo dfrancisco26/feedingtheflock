@@ -1,0 +1,243 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Feeding the Flock SD | Donate"
+  description="Support Feeding the Flock SD with digital donations or mailed checks."
+  page="donate"
+  ogImage="/images/photos/IMG_2239.JPG"
+>
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow">Support Feeding the Flock SD</span>
+        <h1>Help make every food distribution possible.</h1>
+        <p class="lead">
+          Your support helps Feeding the Flock SD provide drive-through food
+          distributions, senior pantry support, emergency food assistance, school
+          partnerships, homeless outreach, and ministry work in Mexico.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#donation-methods" class="btn btn-primary">Give Now</a>
+          <a href="#how-donations-help" class="btn btn-secondary"
+            >How Donations Help</a
+          >
+        </div>
+      </div>
+
+      <div class="hero-panel">
+        <img
+          src="/images/photos/IMG_2239.JPG"
+          alt="Volunteers and supporters helping power community food programs"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section band" id="how-donations-help">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">How Donations Are Used</span>
+        <h2>Your support fuels our mission.</h2>
+        <p>
+          Donations help support the day-to-day work behind Feeding the Flock
+          SD's food programs, including drive-through distributions, pantry
+          support, outreach supplies, school partnerships, and practical care for
+          neighbors in need.
+        </p>
+        <p>
+          Every gift helps strengthen a volunteer-driven effort focused on
+          serving people with consistency, compassion, dignity, and flexibility.
+        </p>
+
+        <div class="card">
+          <h3>
+            Your generosity allows us to continue our programs and offer them to
+            more families and individuals.
+          </h3>
+          <ul>
+            <li>Weekly drive-through food distribution events in Jamul and La Mesa</li>
+            <li>The Santee Senior Pantry and delivery support for housebound seniors</li>
+            <li>Emergency food assistance at the La Mesa Veterans' Club</li>
+            <li>
+              School partnerships to provide food for students after school and
+              on weekends
+            </li>
+            <li>Supplies and support for ministry work across the border</li>
+            <li>Homeless outreach that values dignity, compassion, and understanding</li>
+            <li><strong>... and so much more.</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="split-media">
+        <img
+          src="/images/photos/IMG_2250.JPG"
+          alt="Food boxes prepared and ready for distribution to families"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="donation-methods">
+    <div class="container">
+      <div class="section-header center">
+        <span class="eyebrow">Ways to Donate</span>
+        <h2>Choose a way to give.</h2>
+        <p>
+          Donate securely and conveniently online through PayPal or Venmo. Use the
+          direct links from your phone, or open a QR code if you are giving from
+          another device.
+        </p>
+      </div>
+
+      <div class="payment-grid">
+        {/*
+        <article class="card payment-card">
+          <div class="payment-logo payment-logo-zelle">
+            <img src="/images/zelle.png" alt="Zelle logo" />
+          </div>
+          <p>Give through Zelle for a quick bank-to-bank donation option.</p>
+          <div class="payment-actions">
+            <a href="#" class="btn btn-primary">Open Zelle</a>
+            <button type="button" class="btn btn-secondary" data-donation-option="zelle">Show QR Code</button>
+          </div>
+        </article>
+        */}
+
+        <article class="card payment-card">
+          <div class="payment-logo payment-logo-paypal">
+            <img src="/images/paypal.png" alt="PayPal logo" />
+          </div>
+          <p>Give online through PayPal for a simple and familiar donation option.</p>
+          <div class="payment-actions">
+            <a href="https://paypal.me/debrasuechilders" class="btn btn-primary"
+              >Open PayPal</a
+            >
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-donation-option="paypal">Show QR Code</button
+            >
+          </div>
+        </article>
+
+        <article class="card payment-card">
+          <div class="payment-logo payment-logo-venmo">
+            <img src="/images/venmo.png" alt="Venmo logo" />
+          </div>
+          <p>Give through Venmo for a mobile-friendly way to support the mission.</p>
+          <div class="payment-actions">
+            <a
+              href="https://account.venmo.com/u/feedingtheflock"
+              class="btn btn-primary">Open Venmo</a
+            >
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-donation-option="venmo">Show QR Code</button
+            >
+          </div>
+        </article>
+      </div>
+
+      <div class="check-donation card">
+        <div>
+          <h3>Mail a Check</h3>
+          <p>
+            If you prefer to give by mail, you can send a check to our
+            organization. Please use the information on the right for sending a
+            check through the mail.
+          </p>
+        </div>
+
+        <div class="check-details">
+          <p><strong>Payable to:</strong> Feeding the Flock SD</p>
+          <p>
+            <strong>Mail to:</strong><br />Debra Childers<br />8764 Delta St<br
+            />La Mesa, CA 91942
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="donation-modal" data-donation-modal aria-hidden="true">
+    <div
+      class="donation-modal-content"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="donation-modal-title"
+    >
+      <button
+        type="button"
+        class="modal-close"
+        data-modal-close
+        aria-label="Close donation QR code">×</button
+      >
+      <h2 id="donation-modal-title" data-modal-title>Donation QR Code</h2>
+      <img
+        src="/images/paypal_qr.jpeg"
+        alt="Donation QR code"
+        data-modal-image
+      />
+      <p class="small">
+        Scan this QR code with your phone camera, or use the link below.
+      </p>
+      <a
+        href="https://paypal.me/debrasuechilders"
+        class="btn btn-primary"
+        data-modal-link>Open Donation Link</a
+      >
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container donate-box">
+      <div>
+        <h2>Questions about giving?</h2>
+        <p>
+          Reach out if you need help with donation methods, mailing details,
+          receipts, or other ways to support the work of Feeding the Flock SD.
+        </p>
+        <a
+          href="/contact.html"
+          class="btn btn-secondary"
+          style="margin-bottom: 1.5rem;">Contact Us</a
+        >
+
+        <div class="split-media" style="max-width: 430px; margin-top: 0.25rem;">
+          <img
+            src="/images/photos/IMG_2244.JPG"
+            alt="Volunteers and donors supporting Feeding the Flock SD outreach"
+          />
+        </div>
+      </div>
+
+      <div class="donate-methods" style="align-self: center;">
+        <div class="donate-method">
+          <h3>Donation Help</h3>
+          <p>Contact us if you need help using PayPal, Venmo, or the QR codes.</p>
+        </div>
+
+        <div class="donate-method">
+          <h3>Receipts and Questions</h3>
+          <p>
+            Reach out directly for donation-related questions, acknowledgments, or
+            mailing information.
+          </p>
+        </div>
+
+        <div class="donate-method">
+          <h3>Other Ways to Help</h3>
+          <p>
+            Support can also come through volunteering, community partnerships,
+            food drives, school connections, and helping spread the word.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
