@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import site from "../data/site.json";
+import impact from "../data/impact.json";
 ---
 
 <BaseLayout
@@ -35,34 +37,27 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section class="section tally-section" data-tally-section>
     <div class="container">
       <div class="section-header center">
-        <span class="eyebrow">2026 Impact</span>
-        <h2>Small acts of service add up.</h2>
-        <p>
-          Names and faces are more important than numbers, but we're proud of
-          these.
-        </p>
+        <span class="eyebrow">{impact.eyebrow}</span>
+        <h2>{impact.heading}</h2>
+        <p>{impact.subheading}</p>
       </div>
 
       <div class="tally-grid">
-        <article class="tally-card">
-          <span class="tally-number" data-tally-number data-target="79595">0</span>
-          <p>Pounds of food distributed from the San Diego Food Bank in 2026</p>
-        </article>
-
-        <article class="tally-card">
-          <span
-            class="tally-number"
-            data-tally-number
-            data-target="15400"
-            data-suffix="+">0</span
-          >
-          <p>Individuals and families served</p>
-        </article>
-
-        <article class="tally-card">
-          <span class="tally-number" data-tally-number data-target="8445">0</span>
-          <p>Volunteer Hours in 2026 (So far!)</p>
-        </article>
+        {
+          impact.stats.map((stat) => (
+            <article class="tally-card">
+              <span
+                class="tally-number"
+                data-tally-number
+                data-target={stat.target}
+                data-suffix={stat.suffix || undefined}
+              >
+                0
+              </span>
+              <p>{stat.label}</p>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -236,14 +231,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <div>
         <ul class="contact-list">
           <li>
-            <strong>Feeding the Flock SD</strong><br />
-            <a href="mailto:feedingtheflocksd@gmail.com" class="email-link"
-              >feedingtheflocksd@gmail.com</a
-            >
+            <strong>{site.name}</strong><br />
+            <a href={`mailto:${site.email}`} class="email-link">{site.email}</a>
           </li>
           <li>
-            <strong>Mailing Address</strong><br />8746 Delta St<br />La Mesa, CA
-            91942
+            <strong>Mailing Address</strong><br />{site.address.line1}<br />{
+              site.address.city
+            }, {site.address.state} {site.address.zip}
           </li>
         </ul>
       </div>

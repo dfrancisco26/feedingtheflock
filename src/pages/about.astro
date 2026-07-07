@@ -1,5 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import PointsCard from "../components/PointsCard.astro";
+import { getCollection } from "astro:content";
+
+const byOrder = (a: { data: { order: number } }, b: { data: { order: number } }) =>
+  a.data.order - b.data.order;
+
+const programs = (await getCollection("programs")).sort(byOrder);
+const locations = (await getCollection("locations")).sort(byOrder);
+const partners = (await getCollection("partners")).sort(byOrder);
+const gallery = (await getCollection("gallery")).sort(byOrder);
 ---
 
 <BaseLayout
@@ -86,110 +96,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </div>
 
       <div class="grid grid-2">
-        <article class="card">
-          <h3>Drive-Through Food Distributions</h3>
-          <p>
-            Feeding the Flock SD hosts drive-through food distributions designed
-            to make support convenient, respectful, and easy to access. Families
-            remain in their cars while volunteers load food boxes directly into
-            their trunks.
-          </p>
-          <ul>
-            <li>
-              Food boxes may include proteins, vegetables, fruit, canned goods,
-              and staple items
-            </li>
-            <li>
-              Neighbors can pick up for others when needed, helping food reach
-              more households
-            </li>
-            <li>
-              Distribution days are built around dignity, kindness, and practical
-              care
-            </li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <h3>Santee Senior Pantry</h3>
-          <p>
-            The Santee Senior Pantry gives older adults a welcoming, dignified way
-            to access nutritious food. Seniors can choose grocery items that fit
-            their needs, rather than receiving only a pre-packed box.
-          </p>
-          <ul>
-            <li>Set up like a small, friendly grocery-style pantry</li>
-            <li>
-              Volunteers help with questions, carrying items, and practical
-              support
-            </li>
-            <li>Delivery may be available for housebound seniors when arranged</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <h3>Emergency Pantry</h3>
-          <p>
-            Feeding the Flock SD helps provide emergency food assistance through a
-            pantry at the La Mesa Veterans' Club for neighbors facing urgent or
-            unexpected needs.
-          </p>
-          <ul>
-            <li>
-              Offers support when food needs cannot wait for a regular
-              distribution
-            </li>
-            <li>Helps people facing difficult or sudden circumstances</li>
-            <li>
-              Provides a local point of care in partnership with the La Mesa
-              Veterans' Club
-            </li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <h3>Homeless Outreach</h3>
-          <p>
-            Our homeless outreach provides practical care for people experiencing
-            homelessness, including food, basic supplies, and compassionate
-            connection.
-          </p>
-          <ul>
-            <li>
-              May include meals, hygiene supplies, clean socks, and other
-              essentials
-            </li>
-            <li>Uses food and basic care as a bridge to trust and conversation</li>
-            <li>Helps connect people with partner resources when possible</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <h3>School Partnerships</h3>
-          <p>
-            Feeding the Flock SD partners with a local school to help provide food
-            support for students and families who may need extra help.
-          </p>
-          <ul>
-            <li>Supports children and families through trusted school connections</li>
-            <li>Helps food reach students in a familiar community setting</li>
-            <li>Extends care through practical, relationship-based support</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <h3>Mexico Outreach</h3>
-          <p>
-            Feeding the Flock SD also supports missionary and charity work in
-            Mexico, extending care through food assistance, children's programs,
-            and outreach.
-          </p>
-          <ul>
-            <li>Reflects the organization's faith-based desire to serve</li>
-            <li>Supports care beyond local county lines</li>
-            <li>Connects local generosity with cross-border outreach</li>
-          </ul>
-        </article>
+        {
+          programs.map((program) => (
+            <PointsCard
+              title={program.data.title}
+              description={program.data.description}
+              points={program.data.points}
+            />
+          ))
+        }
       </div>
     </div>
   </section>
@@ -205,61 +120,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </div>
 
       <div class="grid grid-2">
-        <article class="card">
-          <h3>Jamul Drive-Through Distribution</h3>
-          <p>
-            The Jamul distribution serves local households through a convenient
-            drive-through pickup where volunteers load food boxes directly into
-            cars.
-          </p>
-          <ul>
-            <li>Designed for dignity, convenience, and care</li>
-            <li>Supports families and neighbors in the Jamul area</li>
-            <li>Contact us for current pickup details and sign-up information</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <h3>Santee Senior Pantry</h3>
-          <p>
-            The Santee Senior Pantry gives older adults a welcoming way to choose
-            nutritious groceries and receive support that fits their needs.
-          </p>
-          <ul>
-            <li>Serves seniors in a friendly "grocery store" setting</li>
-            <li>Allows participants to choose preferred grocery items</li>
-            <li>Delivery support available for housebound seniors</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <h3>La Mesa Veterans' Club Emergency Pantry</h3>
-          <p>
-            The emergency pantry provides a local point of support for neighbors
-            who need food assistance outside of regular distribution days.
-          </p>
-          <ul>
-            <li>Located at the La Mesa Veterans' Club</li>
-            <li>Designed for urgent or short-term food needs</li>
-            <li>Built around dignity, flexibility, and compassion</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <h3>La Mesa Distribution Center</h3>
-          <p>
-            The La Mesa distribution center helps serve a large and diverse
-            community through drive-through pickup and delivery support.
-          </p>
-          <ul>
-            <li>Helps families access food on their way home from work or school</li>
-            <li>Welcomes proxy pickups for neighbors, relatives, or families in need</li>
-            <li>
-              Supports delivery for homebound seniors and vulnerable residents
-              when available
-            </li>
-          </ul>
-        </article>
+        {
+          locations.map((location) => (
+            <PointsCard
+              title={location.data.title}
+              description={location.data.description}
+              points={location.data.points}
+            />
+          ))
+        }
       </div>
     </div>
   </section>
@@ -282,11 +151,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         class="partner-logo-grid"
         aria-label="Feeding the Flock SD partner logos"
       >
-        <img src="/images/lmcc.jpg" alt="La Mesa Chamber of Commerce" />
-        <img src="/images/acf.jpg" alt="chefs de cuisine association" />
-        <img src="/images/monies.jpg" alt="Monie's" />
-        <img src="/images/lmwc.jpg" alt="La Mesa's Women Club" />
-        <img src="/images/lmvc.jpg" alt="La Mesa Veterans Club" />
+        {partners.map((partner) => <img src={partner.data.logo} alt={partner.data.name} />)}
       </div>
     </div>
   </section>
@@ -304,30 +169,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </div>
 
       <div class="gallery-grid">
-        <img
-          src="/images/photos/IMG_2252.JPG"
-          alt="Community volunteers supporting a local food outreach event"
-        />
-        <img
-          src="/images/photos/IMG_2262.JPG"
-          alt="Food boxes and supplies prepared for distribution"
-        />
-        <img
-          src="/images/photos/IMG_2235.JPG"
-          alt="Volunteers working together during a distribution day"
-        />
-        <img
-          src="/images/photos/IMG_2239.JPG"
-          alt="Families and neighbors receiving food assistance"
-        />
-        <img
-          src="/images/photos/IMG_2268.JPG"
-          alt="Outreach team members serving the community with care"
-        />
-        <img
-          src="/images/photos/IMG_2254.JPG"
-          alt="A snapshot from a Feeding the Flock SD service day"
-        />
+        {gallery.map((photo) => <img src={photo.data.src} alt={photo.data.alt} />)}
       </div>
     </div>
   </section>

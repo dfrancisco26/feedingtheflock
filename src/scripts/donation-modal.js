@@ -1,31 +1,20 @@
-
-
-const donationOptions = {
-  /*
-  zelle: {
-    title: "Zelle",
-    qrSrc: "/images/zelle_qr.jpeg",
-    link: "#",
-    linkText: "Open Zelle",
-  },
-  */
-  paypal: {
-    title: "PayPal",
-    qrSrc: "/images/paypal_qr.jpeg",
-    link: "https://paypal.me/debrasuechilders",
-    linkText: "Open PayPal",
-  },
-  venmo: {
-    title: "Venmo",
-    qrSrc: "/images/venmo_qr.jpeg",
-    link: "https://account.venmo.com/u/feedingtheflock",
-    linkText: "Open Venmo",
-  },
-};
+// Donation options (title, QR image, link) are injected by donate.astro as a
+// JSON data island, sourced from src/data/site.json.
+function loadDonationOptions() {
+  const dataEl = document.querySelector("[data-donation-options]");
+  if (!dataEl) return {};
+  try {
+    return JSON.parse(dataEl.textContent || "{}");
+  } catch {
+    return {};
+  }
+}
 
 export function initDonationModal() {
   const modal = document.querySelector("[data-donation-modal]");
   if (!modal) return;
+
+  const donationOptions = loadDonationOptions();
 
   const title = modal.querySelector("[data-modal-title]");
   const image = modal.querySelector("[data-modal-image]");

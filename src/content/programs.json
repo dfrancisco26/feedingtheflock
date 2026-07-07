@@ -1,0 +1,68 @@
+[
+  {
+    "id": "drive-through-distributions",
+    "order": 1,
+    "title": "Drive-Through Food Distributions",
+    "description": "Feeding the Flock SD hosts drive-through food distributions designed to make support convenient, respectful, and easy to access. Families remain in their cars while volunteers load food boxes directly into their trunks.",
+    "points": [
+      "Food boxes may include proteins, vegetables, fruit, canned goods, and staple items",
+      "Neighbors can pick up for others when needed, helping food reach more households",
+      "Distribution days are built around dignity, kindness, and practical care"
+    ]
+  },
+  {
+    "id": "santee-senior-pantry",
+    "order": 2,
+    "title": "Santee Senior Pantry",
+    "description": "The Santee Senior Pantry gives older adults a welcoming, dignified way to access nutritious food. Seniors can choose grocery items that fit their needs, rather than receiving only a pre-packed box.",
+    "points": [
+      "Set up like a small, friendly grocery-style pantry",
+      "Volunteers help with questions, carrying items, and practical support",
+      "Delivery may be available for housebound seniors when arranged"
+    ]
+  },
+  {
+    "id": "emergency-pantry",
+    "order": 3,
+    "title": "Emergency Pantry",
+    "description": "Feeding the Flock SD helps provide emergency food assistance through a pantry at the La Mesa Veterans' Club for neighbors facing urgent or unexpected needs.",
+    "points": [
+      "Offers support when food needs cannot wait for a regular distribution",
+      "Helps people facing difficult or sudden circumstances",
+      "Provides a local point of care in partnership with the La Mesa Veterans' Club"
+    ]
+  },
+  {
+    "id": "homeless-outreach",
+    "order": 4,
+    "title": "Homeless Outreach",
+    "description": "Our homeless outreach provides practical care for people experiencing homelessness, including food, basic supplies, and compassionate connection.",
+    "points": [
+      "May include meals, hygiene supplies, clean socks, and other essentials",
+      "Uses food and basic care as a bridge to trust and conversation",
+      "Helps connect people with partner resources when possible"
+    ]
+  },
+  {
+    "id": "school-partnerships",
+    "order": 5,
+    "title": "School Partnerships",
+    "description": "Feeding the Flock SD partners with a local school to help provide food support for students and families who may need extra help.",
+    "points": [
+      "Supports children and families through trusted school connections",
+      "Helps food reach students in a familiar community setting",
+      "Extends care through practical, relationship-based support"
+    ]
+  },
+  {
+    "id": "mexico-outreach",
+    "order": 6,
+    "title": "Mexico Outreach",
+    "description": "Feeding the Flock SD also supports missionary and charity work in Mexico, extending care through food assistance, children's programs, and outreach.",
+    "points": [
+      "Reflects the organization's faith-based desire to serve",
+      "Supports care beyond local county lines",
+      "Connects local generosity with cross-border outreach"
+    ]
+  }
+]

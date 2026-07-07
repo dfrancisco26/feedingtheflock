@@ -9,6 +9,51 @@ See the phased plan for the full roadmap.
 
 ## [Unreleased] — `astro-migration` branch
 
+### Phase 3 — Content collections (2026-07-07)
+
+Separated content from markup. Copy, events, impact numbers, programs,
+locations, partners, and gallery photos now live in structured, schema-validated
+data files; the pages render from them. This is the single-source-of-truth
+groundwork for the Phase 5 admin dashboard. No visual change intended.
+
+- **Added** `src/content.config.ts` defining five zod-validated collections via
+  Astro's `file()` loader: `programs`, `locations`, `partners`, `gallery`, and
+  `events` (a discriminated union over `weekly` / `monthlyNthWeekday` / `dates`).
+- **Added** singletons in `src/data/`:
+  - `site.json` — org name, EIN, nonprofit disclosure, logo, email, address,
+    social links, food-box form URL, donation methods (with an `enabled` flag),
+    check details, and the leadership roster.
+  - `impact.json` — the home page tally (eyebrow, heading, and the three stats).
+- **Added** collection data in `src/content/`: `programs.json` (6),
+  `locations.json` (4), `partners.json` (5), `gallery.json` (6), `events.json` (6).
+- **Added** `src/components/PointsCard.astro`, shared by the Programs and
+  Locations sections (title + paragraph + bullet list).
+- **Rewired pages to render from data:**
+  - `about.astro` — Programs, Locations, Partners, and Gallery map over their
+    collections.
+  - `index.astro` — impact section from `impact.json`; footer contact block from
+    `site.json`.
+  - `contact.astro` — social links, org block, and leadership roster from `site.json`.
+  - `donate.astro` — payment cards and check details from `site.json`; only
+    methods with `enabled: true` render (this replaces the commented-out Zelle
+    block — set `enabled: true` to bring it back).
+  - `Header.astro` / `Footer.astro` — logo, org name, and disclosure from `site.json`.
+- **Client scripts now read injected JSON data islands** instead of hard-coded
+  arrays:
+  - `events.astro` emits a `data-calendar-data` island (events +
+    food-box URL); `events-calendar.js` reads it (`expandEvents` now takes the
+    sources as an argument).
+  - `donate.astro` emits a `data-donation-options` island; `donation-modal.js`
+    reads it.
+
+Data inconsistencies surfaced while extracting content (preserved as-is; confirm
+which is correct):
+
+- Org mailing address is `8746 Delta St`, but the "mail a check" address is
+  `8764 Delta St`.
+- The Senior Coordinator email was displayed as `demar1@cox.net` but linked to
+  `demars1@cox.net`; both now use the linked `demars1@cox.net`.
+
 ### Phase 2 — Astro scaffold + page port (2026-07-07)
 
 Migrated the hand-built multi-page site to **Astro** with static output. The
@@ -58,8 +103,10 @@ site looks and behaves the same; the structure underneath is now componentized.
 
 ## Roadmap (not yet started)
 
-- **Phase 3** — Extract content (copy, events, tally, partners, gallery) into
-  Astro content collections; set up Cloudinary and migrate photos out of the repo.
 - **Phase 4** — Wide gallery album with optimized thumbnails and a React
-  lightbox island.
-- **Phase 5** — Admin dashboard (Git-based CMS) with GitHub OAuth login.
+  lightbox island, rendered from the `gallery` collection.
+- **Phase 5** — Admin dashboard (Git-based CMS) with GitHub OAuth login, editing
+  the `src/content` and `src/data` files.
+
+Image hosting on Cloudinary is deferred; photos stay in `public/images/` and are
+optimized/compressed manually for now.

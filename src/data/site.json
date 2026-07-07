@@ -1,0 +1,92 @@
+{
+  "name": "Feeding the Flock SD",
+  "tagline": "Outreach with compassion since 2016",
+  "ein": "99-2671065",
+  "nonprofitDisclosure": "Feeding the Flock SD is a registered 501(c)(3) nonprofit organization. Contributions may be tax deductible. EIN: 99-2671065",
+  "logo": "/images/logo_2026.png",
+  "email": "feedingtheflocksd@gmail.com",
+  "address": {
+    "line1": "8746 Delta St",
+    "city": "La Mesa",
+    "state": "CA",
+    "zip": "91942"
+  },
+  "social": {
+    "facebook": "https://www.facebook.com/feedingtheflocksd/",
+    "instagram": "https://www.instagram.com/feeding_the_flock_sd"
+  },
+  "foodBoxFormUrl": "https://m.signupgenius.com/#!/showSignUp/10C0D4DAEAF28AAF9C52-63943411-lamesa",
+  "donation": {
+    "methods": [
+      {
+        "id": "paypal",
+        "title": "PayPal",
+        "enabled": true,
+        "link": "https://paypal.me/debrasuechilders",
+        "linkText": "Open PayPal",
+        "logo": "/images/paypal.png",
+        "logoClass": "payment-logo-paypal",
+        "qr": "/images/paypal_qr.jpeg",
+        "blurb": "Give online through PayPal for a simple and familiar donation option."
+      },
+      {
+        "id": "venmo",
+        "title": "Venmo",
+        "enabled": true,
+        "link": "https://account.venmo.com/u/feedingtheflock",
+        "linkText": "Open Venmo",
+        "logo": "/images/venmo.png",
+        "logoClass": "payment-logo-venmo",
+        "qr": "/images/venmo_qr.jpeg",
+        "blurb": "Give through Venmo for a mobile-friendly way to support the mission."
+      },
+      {
+        "id": "zelle",
+        "title": "Zelle",
+        "enabled": false,
+        "link": "#",
+        "linkText": "Open Zelle",
+        "logo": "/images/zelle.png",
+        "logoClass": "payment-logo-zelle",
+        "qr": "/images/zelle_qr.jpeg",
+        "blurb": "Give through Zelle for a quick bank-to-bank donation option."
+      }
+    ],
+    "check": {
+      "payableTo": "Feeding the Flock SD",
+      "mailTo": ["Debra Childers", "8764 Delta St", "La Mesa, CA 91942"]
+    }
+  },
+  "contacts": [
+    {
+      "name": "Debra Childers",
+      "role": "Founder",
+      "email": "debrasuechilders@aol.com"
+    },
+    {
+      "name": "Suzi Mark",
+      "role": "Secretary",
+      "email": "suzimarktn@gmail.com"
+    },
+    {
+      "name": "David Chenelle",
+      "role": "Treasurer",
+      "email": "cheflegere@gmail.com"
+    },
+    {
+      "name": "Ladonna Nunn",
+      "role": "Jamul Distribution",
+      "email": "nunnhere1993@gmail.com"
+    },
+    {
+      "name": "LaDawn Jung",
+      "role": "La Mesa Distribution",
+      "email": "ladawn@sewingquiltingandembroidery.com"
+    },
+    {
+      "name": "MaryAnn Silva De Mars",
+      "role": "Senior Coordinator",
+      "email": "demars1@cox.net"
+    }
+  ]
+}

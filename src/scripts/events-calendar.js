@@ -1,59 +1,14 @@
-const eventSources = [
-  {
-    title: "Senior Pantry",
-    time: "8:30 AM",
-    type: "weekly",
-    weekday: 6,
-    description: "Weekly senior pantry support.",
-  },
-  {
-    title: "Breakfast Burritos Outreach",
-    time: "10:00 AM",
-    type: "weekly",
-    weekday: 2,
-    description: "Morning burrito outreach.",
-  },
-  {
-    title: "Dinner Burritos Outreach",
-    time: "5:00 PM",
-    type: "weekly",
-    weekday: 4,
-    description: "Evening burrito outreach.",
-  },
-  {
-    title: "La Mesa Food Distribution",
-    time: "4:00-6:00 PM",
-    type: "monthlyNthWeekday",
-    weekday: 3,
-    nth: 4,
-    description: "Every fourth Wednesday of the month.",
-  },
-  {
-    title: "Jamul Distribution Day",
-    time: "Time TBD",
-    type: "dates",
-    description: "Drive-through food box distribution.",
-    dates: [
-      "2026-05-19",
-      "2026-06-16",
-      "2026-07-21",
-      "2026-08-18",
-      "2026-09-15",
-      "2026-10-20",
-      "2026-11-24",
-      "2026-12-15",
-    ],
-  },
-  {
-    title: "Fashion Show",
-    time: "Time TBD",
-    type: "dates",
-    description: "Community fashion show event.",
-    dates: ["2026-05-30"],
-  },
-];
-
-const foodBoxFormUrl = "https://m.signupgenius.com/#!/showSignUp/10C0D4DAEAF28AAF9C52-63943411-lamesa";
+// Event data and the food-box form URL are injected by events.astro as a JSON
+// data island, sourced from src/content/events.json and src/data/site.json.
+function loadCalendarData() {
+  const dataEl = document.querySelector("[data-calendar-data]");
+  if (!dataEl) return null;
+  try {
+    return JSON.parse(dataEl.textContent || "{}");
+  } catch {
+    return null;
+  }
+}
 
 const calendarWindow = {
   monthsBack: 0,
@@ -95,7 +50,7 @@ function getCalendarBounds(referenceDate = new Date()) {
   return { startMonth, endMonth, monthCount };
 }
 
-function expandEvents(startMonth, endMonth) {
+function expandEvents(eventSources, startMonth, endMonth) {
   const events = [];
 
   eventSources.forEach((source) => {
@@ -259,6 +214,12 @@ function renderUpcomingEvents(events) {
 }
 
 export function initEventsCalendar() {
+  const calendarData = loadCalendarData();
+  if (!calendarData) return;
+
+  const eventSources = calendarData.events || [];
+  const foodBoxFormUrl = calendarData.foodBoxFormUrl || "#";
+
   const calendarTarget = document.querySelector("[data-events-calendar]");
   const upcomingTarget = document.querySelector("[data-upcoming-events]");
   const formLinks = document.querySelectorAll("[data-food-box-form-link]");
@@ -270,7 +231,7 @@ export function initEventsCalendar() {
   if (!calendarTarget && !upcomingTarget) return;
 
   const { startMonth, endMonth, monthCount } = getCalendarBounds();
-  const events = expandEvents(startMonth, endMonth);
+  const events = expandEvents(eventSources, startMonth, endMonth);
 
   if (upcomingTarget) {
     upcomingTarget.innerHTML = renderUpcomingEvents(events);

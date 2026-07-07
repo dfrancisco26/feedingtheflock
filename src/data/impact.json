@@ -1,0 +1,25 @@
+{
+  "eyebrow": "2026 Impact",
+  "heading": "Small acts of service add up.",
+  "subheading": "Names and faces are more important than numbers, but we're proud of these.",
+  "stats": [
+    {
+      "id": "food",
+      "target": 79595,
+      "suffix": "",
+      "label": "Pounds of food distributed from the San Diego Food Bank in 2026"
+    },
+    {
+      "id": "served",
+      "target": 15400,
+      "suffix": "+",
+      "label": "Individuals and families served"
+    },
+    {
+      "id": "hours",
+      "target": 8445,
+      "suffix": "",
+      "label": "Volunteer Hours in 2026 (So far!)"
+    }
+  ]
+}

@@ -30,11 +30,22 @@ Project Structure
 public/
   images/              Static images, served at /images/... (logos, photos, QR codes)
 src/
+  data/                Site-wide singletons (imported directly)
+    site.json          Org info, socials, donation methods, form URL, contacts
+    impact.json        Home page tally (headings + the three stats)
+  content/             Content collections (schema-validated data)
+    programs.json      About > Programs
+    locations.json     About > Locations
+    partners.json      About > Partners (logos)
+    gallery.json       About > Gallery (also the base for the Phase 4 album)
+    events.json        Events calendar sources (recurrence-aware)
+  content.config.ts    Collection definitions + zod schemas
   layouts/
     BaseLayout.astro   <head> (meta, favicon, Open Graph), header/footer, shared scripts
   components/
     Header.astro       Site header + primary nav (active state per page)
     Footer.astro       Footer with nonprofit disclosure + nav
+    PointsCard.astro   Reusable card (title + paragraph + bullets) for Programs/Locations
   pages/               One file per route (build.format "file" => /about.html, etc.)
     index.astro        Home
     about.astro        About: story, programs, locations, partners, gallery
@@ -43,8 +54,8 @@ src/
     contact.astro      Contact info and social links
   scripts/             Client-side behavior, run from BaseLayout (each self-guards)
     tally.js           Animated impact counters (home)
-    donation-modal.js  Donate page QR modal
-    events-calendar.js Events data + calendar/upcoming rendering
+    donation-modal.js  Donate page QR modal (reads a JSON data island)
+    events-calendar.js Calendar/upcoming rendering (reads a JSON data island)
   styles/
     global.css         Global styles for all pages
 astro.config.mjs       Astro config (site URL, file-based output)
@@ -64,19 +75,27 @@ How It Works
   bundled by Astro. Each init function no-ops when its markup is not on the page,
   so it is safe to load them everywhere.
 
-Editing Content (for now)
--------------------------
+Editing Content
+---------------
 
-Content currently lives inside the `.astro` pages and script files. Until the
-content collections and admin dashboard land (Phases 3 and 5), edits are made in
-code:
+Most editable content now lives in data files, separate from the page markup.
+Until the admin dashboard lands (Phase 5), edit these files directly:
 
-- **Events** — `src/scripts/events-calendar.js` (`eventSources` array).
-- **Food box request link** — `foodBoxFormUrl` in `src/scripts/events-calendar.js`.
-- **Impact numbers** — `data-target` attributes in `src/pages/index.astro`.
-- **Donation links / QR codes** — `src/pages/donate.astro` and
-  `src/scripts/donation-modal.js`.
-- **Photos** — files in `public/images/photos/`, referenced from the pages.
+- **Org info, socials, donation methods, food-box form link, contacts** —
+  `src/data/site.json`.
+- **Impact numbers** — `src/data/impact.json`.
+- **Events** — `src/content/events.json` (each entry is `weekly`,
+  `monthlyNthWeekday`, or `dates`).
+- **Programs / Locations / Partners / Gallery** — the matching file in
+  `src/content/`.
+- **Photos** — add the file under `public/images/photos/`, then reference it from
+  `src/content/gallery.json` (or the relevant page).
+
+Schemas for the collections live in `src/content.config.ts`; the build fails
+with a clear error if a data file does not match its schema.
+
+Narrative/hero copy that is specific to a single page still lives inline in that
+page's `.astro` file.
 
 Deployment
 ----------
@@ -98,9 +117,11 @@ and canonical URLs are correct.
 Roadmap
 -------
 
-- **Phase 3** — Move content into Astro content collections; migrate photos to
-  Cloudinary.
-- **Phase 4** — Wide gallery album with optimized images and a lightbox.
-- **Phase 5** — Admin dashboard via a Git-based CMS with GitHub login.
+- **Phase 4** — Wide gallery album with optimized images and a lightbox, driven
+  by `src/content/gallery.json`.
+- **Phase 5** — Admin dashboard via a Git-based CMS with GitHub login, editing
+  the files under `src/content/` and `src/data/`.
+
+Image hosting on Cloudinary is deferred; photos stay in `public/images/` for now.
 
 See [`CHANGELOG.md`](CHANGELOG.md) for detailed history.

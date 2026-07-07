@@ -1,0 +1,60 @@
+[
+  {
+    "id": "senior-pantry",
+    "title": "Senior Pantry",
+    "time": "8:30 AM",
+    "type": "weekly",
+    "weekday": 6,
+    "description": "Weekly senior pantry support."
+  },
+  {
+    "id": "breakfast-burritos",
+    "title": "Breakfast Burritos Outreach",
+    "time": "10:00 AM",
+    "type": "weekly",
+    "weekday": 2,
+    "description": "Morning burrito outreach."
+  },
+  {
+    "id": "dinner-burritos",
+    "title": "Dinner Burritos Outreach",
+    "time": "5:00 PM",
+    "type": "weekly",
+    "weekday": 4,
+    "description": "Evening burrito outreach."
+  },
+  {
+    "id": "la-mesa-distribution",
+    "title": "La Mesa Food Distribution",
+    "time": "4:00-6:00 PM",
+    "type": "monthlyNthWeekday",
+    "weekday": 3,
+    "nth": 4,
+    "description": "Every fourth Wednesday of the month."
+  },
+  {
+    "id": "jamul-distribution",
+    "title": "Jamul Distribution Day",
+    "time": "Time TBD",
+    "type": "dates",
+    "description": "Drive-through food box distribution.",
+    "dates": [
+      "2026-05-19",
+      "2026-06-16",
+      "2026-07-21",
+      "2026-08-18",
+      "2026-09-15",
+      "2026-10-20",
+      "2026-11-24",
+      "2026-12-15"
+    ]
+  },
+  {
+    "id": "fashion-show",
+    "title": "Fashion Show",
+    "time": "Time TBD",
+    "type": "dates",
+    "description": "Community fashion show event.",
+    "dates": ["2026-05-30"]
+  }
+]

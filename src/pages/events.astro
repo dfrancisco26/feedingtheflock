@@ -1,5 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import site from "../data/site.json";
+import { getCollection } from "astro:content";
+
+// Raw event definitions handed to the client-side calendar renderer.
+const events = (await getCollection("events")).map((entry) => entry.data);
+const calendarData = { events, foodBoxFormUrl: site.foodBoxFormUrl };
 ---
 
 <BaseLayout
@@ -68,4 +74,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <div class="events-calendar" data-events-calendar></div>
     </div>
   </section>
+
+  <script
+    type="application/json"
+    data-calendar-data
+    is:inline
+    set:html={JSON.stringify(calendarData)}
+  />
 </BaseLayout>

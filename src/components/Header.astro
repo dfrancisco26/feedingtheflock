@@ -1,6 +1,8 @@
 ---
 // Site header + primary navigation.
 // `page` marks the active nav item (matches the old data-page values).
+import site from "../data/site.json";
+
 interface Props {
   page?: string;
 }
@@ -19,9 +21,9 @@ const navLinks = [
   <div class="container header-inner">
     <a href="/" class="logo">
       <span class="logo-mark" aria-hidden="true">
-        <img src="/images/logo_2026.png" alt="" class="logo-icon" />
+        <img src={site.logo} alt="" class="logo-icon" />
       </span>
-      <span class="logo-text">Feeding the Flock SD</span>
+      <span class="logo-text">{site.name}</span>
     </a>
 
     <nav aria-label="Primary navigation">

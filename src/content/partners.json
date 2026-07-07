@@ -1,0 +1,32 @@
+[
+  {
+    "id": "la-mesa-chamber",
+    "order": 1,
+    "name": "La Mesa Chamber of Commerce",
+    "logo": "/images/lmcc.jpg"
+  },
+  {
+    "id": "chefs-de-cuisine",
+    "order": 2,
+    "name": "chefs de cuisine association",
+    "logo": "/images/acf.jpg"
+  },
+  {
+    "id": "monies",
+    "order": 3,
+    "name": "Monie's",
+    "logo": "/images/monies.jpg"
+  },
+  {
+    "id": "la-mesa-womens-club",
+    "order": 4,
+    "name": "La Mesa's Women Club",
+    "logo": "/images/lmwc.jpg"
+  },
+  {
+    "id": "la-mesa-veterans-club",
+    "order": 5,
+    "name": "La Mesa Veterans Club",
+    "logo": "/images/lmvc.jpg"
+  }
+]

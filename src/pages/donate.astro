@@ -1,5 +1,23 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import site from "../data/site.json";
+
+const enabledMethods = site.donation.methods.filter((method) => method.enabled);
+const check = site.donation.check;
+
+// Data consumed by the QR modal (donation-modal.js).
+const modalOptions = Object.fromEntries(
+  enabledMethods.map((method) => [
+    method.id,
+    {
+      title: method.title,
+      qrSrc: method.qr,
+      link: method.link,
+      linkText: method.linkText,
+    },
+  ]),
+);
+const firstMethod = enabledMethods[0];
 ---
 
 <BaseLayout
@@ -94,53 +112,28 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </div>
 
       <div class="payment-grid">
-        {/*
-        <article class="card payment-card">
-          <div class="payment-logo payment-logo-zelle">
-            <img src="/images/zelle.png" alt="Zelle logo" />
-          </div>
-          <p>Give through Zelle for a quick bank-to-bank donation option.</p>
-          <div class="payment-actions">
-            <a href="#" class="btn btn-primary">Open Zelle</a>
-            <button type="button" class="btn btn-secondary" data-donation-option="zelle">Show QR Code</button>
-          </div>
-        </article>
-        */}
-
-        <article class="card payment-card">
-          <div class="payment-logo payment-logo-paypal">
-            <img src="/images/paypal.png" alt="PayPal logo" />
-          </div>
-          <p>Give online through PayPal for a simple and familiar donation option.</p>
-          <div class="payment-actions">
-            <a href="https://paypal.me/debrasuechilders" class="btn btn-primary"
-              >Open PayPal</a
-            >
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-donation-option="paypal">Show QR Code</button
-            >
-          </div>
-        </article>
-
-        <article class="card payment-card">
-          <div class="payment-logo payment-logo-venmo">
-            <img src="/images/venmo.png" alt="Venmo logo" />
-          </div>
-          <p>Give through Venmo for a mobile-friendly way to support the mission.</p>
-          <div class="payment-actions">
-            <a
-              href="https://account.venmo.com/u/feedingtheflock"
-              class="btn btn-primary">Open Venmo</a
-            >
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-donation-option="venmo">Show QR Code</button
-            >
-          </div>
-        </article>
+        {
+          enabledMethods.map((method) => (
+            <article class="card payment-card">
+              <div class={`payment-logo ${method.logoClass}`}>
+                <img src={method.logo} alt={`${method.title} logo`} />
+              </div>
+              <p>{method.blurb}</p>
+              <div class="payment-actions">
+                <a href={method.link} class="btn btn-primary">
+                  {method.linkText}
+                </a>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-donation-option={method.id}
+                >
+                  Show QR Code
+                </button>
+              </div>
+            </article>
+          ))
+        }
       </div>
 
       <div class="check-donation card">
@@ -154,10 +147,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </div>
 
         <div class="check-details">
-          <p><strong>Payable to:</strong> Feeding the Flock SD</p>
+          <p><strong>Payable to:</strong> {check.payableTo}</p>
           <p>
-            <strong>Mail to:</strong><br />Debra Childers<br />8764 Delta St<br
-            />La Mesa, CA 91942
+            <strong>Mail to:</strong><br />{
+              check.mailTo.map((line, index) => (
+                <Fragment>
+                  {index > 0 && <br />}
+                  {line}
+                </Fragment>
+              ))
+            }
           </p>
         </div>
       </div>
@@ -178,21 +177,22 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         aria-label="Close donation QR code">×</button
       >
       <h2 id="donation-modal-title" data-modal-title>Donation QR Code</h2>
-      <img
-        src="/images/paypal_qr.jpeg"
-        alt="Donation QR code"
-        data-modal-image
-      />
+      <img src={firstMethod.qr} alt="Donation QR code" data-modal-image />
       <p class="small">
         Scan this QR code with your phone camera, or use the link below.
       </p>
-      <a
-        href="https://paypal.me/debrasuechilders"
-        class="btn btn-primary"
-        data-modal-link>Open Donation Link</a
+      <a href={firstMethod.link} class="btn btn-primary" data-modal-link
+        >Open Donation Link</a
       >
     </div>
   </div>
+
+  <script
+    type="application/json"
+    data-donation-options
+    is:inline
+    set:html={JSON.stringify(modalOptions)}
+  />
 
   <section class="section">
     <div class="container donate-box">

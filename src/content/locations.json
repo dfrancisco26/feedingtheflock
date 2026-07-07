@@ -1,0 +1,46 @@
+[
+  {
+    "id": "jamul-drive-through",
+    "order": 1,
+    "title": "Jamul Drive-Through Distribution",
+    "description": "The Jamul distribution serves local households through a convenient drive-through pickup where volunteers load food boxes directly into cars.",
+    "points": [
+      "Designed for dignity, convenience, and care",
+      "Supports families and neighbors in the Jamul area",
+      "Contact us for current pickup details and sign-up information"
+    ]
+  },
+  {
+    "id": "santee-senior-pantry",
+    "order": 2,
+    "title": "Santee Senior Pantry",
+    "description": "The Santee Senior Pantry gives older adults a welcoming way to choose nutritious groceries and receive support that fits their needs.",
+    "points": [
+      "Serves seniors in a friendly \"grocery store\" setting",
+      "Allows participants to choose preferred grocery items",
+      "Delivery support available for housebound seniors"
+    ]
+  },
+  {
+    "id": "la-mesa-emergency-pantry",
+    "order": 3,
+    "title": "La Mesa Veterans' Club Emergency Pantry",
+    "description": "The emergency pantry provides a local point of support for neighbors who need food assistance outside of regular distribution days.",
+    "points": [
+      "Located at the La Mesa Veterans' Club",
+      "Designed for urgent or short-term food needs",
+      "Built around dignity, flexibility, and compassion"
+    ]
+  },
+  {
+    "id": "la-mesa-distribution-center",
+    "order": 4,
+    "title": "La Mesa Distribution Center",
+    "description": "The La Mesa distribution center helps serve a large and diverse community through drive-through pickup and delivery support.",
+    "points": [
+      "Helps families access food on their way home from work or school",
+      "Welcomes proxy pickups for neighbors, relatives, or families in need",
+      "Supports delivery for homebound seniors and vulnerable residents when available"
+    ]
+  }
+]
