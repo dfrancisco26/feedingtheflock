@@ -9,6 +9,30 @@ See the phased plan for the full roadmap.
 
 ## [Unreleased] — `astro-migration` branch
 
+### Phase 4 — Wide gallery album + React lightbox (2026-07-07)
+
+Added a dedicated photo gallery with a full-screen viewer. This introduces the
+first **React island** in the project (the "React" part of the Astro + React
+islands architecture).
+
+- **Added** `@astrojs/react` and React 19; registered the integration in
+  `astro.config.mjs`.
+- **Added** `/gallery.html` (`src/pages/gallery.astro`) — a wide, full-bleed
+  masonry album (CSS columns, responsive 4 → 1) that renders every album photo
+  from `gallery.json` with lazy-loaded images.
+- **Added** `src/islands/Lightbox.tsx` — a React island hydrated `client:idle`:
+  full-screen viewer with previous/next, keyboard nav (←/→/Esc), caption,
+  counter, and body scroll-lock. Progressive enhancement — with JS disabled, the
+  album photos link straight to the image files.
+- **Expanded** `gallery.json` from 6 to 25 photos: every image in
+  `public/images/photos/` except the 9 already used as page heroes/splits.
+  **Alt text for the 19 newly added photos is provisional** and should be
+  reviewed against the actual images for accuracy.
+- **Added** "Gallery" to the header and footer navigation.
+- **Updated** the About page gallery to a 6-photo teaser with a "View all
+  photos" link to `/gallery.html`.
+- **Added** album + lightbox styles to `global.css`.
+
 ### Phase 3 — Content collections (2026-07-07)
 
 Separated content from markup. Copy, events, impact numbers, programs,
@@ -103,8 +127,6 @@ site looks and behaves the same; the structure underneath is now componentized.
 
 ## Roadmap (not yet started)
 
-- **Phase 4** — Wide gallery album with optimized thumbnails and a React
-  lightbox island, rendered from the `gallery` collection.
 - **Phase 5** — Admin dashboard (Git-based CMS) with GitHub OAuth login, editing
   the `src/content` and `src/data` files.
 

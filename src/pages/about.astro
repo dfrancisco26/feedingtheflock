@@ -9,7 +9,8 @@ const byOrder = (a: { data: { order: number } }, b: { data: { order: number } })
 const programs = (await getCollection("programs")).sort(byOrder);
 const locations = (await getCollection("locations")).sort(byOrder);
 const partners = (await getCollection("partners")).sort(byOrder);
-const gallery = (await getCollection("gallery")).sort(byOrder);
+// Show a short teaser here; the full album lives on /gallery.html.
+const galleryPreview = (await getCollection("gallery")).sort(byOrder).slice(0, 6);
 ---
 
 <BaseLayout
@@ -169,7 +170,11 @@ const gallery = (await getCollection("gallery")).sort(byOrder);
       </div>
 
       <div class="gallery-grid">
-        {gallery.map((photo) => <img src={photo.data.src} alt={photo.data.alt} />)}
+        {galleryPreview.map((photo) => <img src={photo.data.src} alt={photo.data.alt} />)}
+      </div>
+
+      <div class="center" style="margin-top: 2rem;">
+        <a href="/gallery.html" class="btn btn-primary">View all photos</a>
       </div>
     </div>
   </section>

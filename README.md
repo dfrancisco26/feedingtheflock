@@ -2,7 +2,8 @@ Feeding the Flock SD Website
 ============================
 
 Marketing site for Feeding the Flock SD, a 501(c)(3) nonprofit. Built with
-[Astro](https://astro.build/) and deployed as a static site on Cloudflare Pages.
+[Astro](https://astro.build/) — static HTML with small [React](https://react.dev/)
+islands for interactivity — and deployed on Cloudflare Pages.
 
 > Migrating from the original hand-built HTML site to Astro. See
 > [`CHANGELOG.md`](CHANGELOG.md) for what has changed and what is planned.
@@ -46,9 +47,12 @@ src/
     Header.astro       Site header + primary nav (active state per page)
     Footer.astro       Footer with nonprofit disclosure + nav
     PointsCard.astro   Reusable card (title + paragraph + bullets) for Programs/Locations
+  islands/             Interactive React components (hydrated on the client)
+    Lightbox.tsx       Full-screen photo viewer for the gallery
   pages/               One file per route (build.format "file" => /about.html, etc.)
     index.astro        Home
-    about.astro        About: story, programs, locations, partners, gallery
+    about.astro        About: story, programs, locations, partners, gallery teaser
+    gallery.astro      Wide photo album (masonry) + React lightbox
     events.astro       Food Help & Events: upcoming events + monthly calendar
     donate.astro       Donation methods + QR modal
     contact.astro      Contact info and social links
@@ -117,8 +121,6 @@ and canonical URLs are correct.
 Roadmap
 -------
 
-- **Phase 4** — Wide gallery album with optimized images and a lightbox, driven
-  by `src/content/gallery.json`.
 - **Phase 5** — Admin dashboard via a Git-based CMS with GitHub login, editing
   the files under `src/content/` and `src/data/`.
 

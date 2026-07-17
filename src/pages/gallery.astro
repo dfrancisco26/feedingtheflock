@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Lightbox from "../islands/Lightbox.tsx";
+import { getCollection } from "astro:content";
+
+const photos = (await getCollection("gallery"))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((entry) => ({ src: entry.data.src, alt: entry.data.alt }));
+---
+
+<BaseLayout
+  title="Feeding the Flock SD | Gallery"
+  description="A photo gallery of Feeding the Flock SD food distributions, pantry support, volunteers, outreach, and ministry work."
+  page="gallery"
+  ogImage={photos[0]?.src ?? "/images/photos/IMG_2255.JPG"}
+>
+  <section class="section">
+    <div class="container">
+      <div class="section-header center">
+        <span class="eyebrow">Gallery</span>
+        <h1>Moments from the work and the community behind it.</h1>
+        <p>
+          Sorting and packing food boxes, distribution days, pantry support,
+          outreach, and ministry work in Mexico — a look at the people and the
+          service that make Feeding the Flock SD possible. Select any photo to
+          view it larger.
+        </p>
+      </div>
+    </div>
+
+    <div class="album" role="list">
+      {
+        photos.map((photo, index) => (
+          <a
+            class="album-item"
+            role="listitem"
+            href={photo.src}
+            data-lightbox
+            data-index={index}
+            aria-label={`View larger: ${photo.alt}`}
+          >
+            <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" />
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <Lightbox photos={photos} client:idle />
+</BaseLayout>
