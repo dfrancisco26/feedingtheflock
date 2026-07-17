@@ -3,9 +3,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Lightbox from "../islands/Lightbox.tsx";
 import { getCollection } from "astro:content";
 
-const photos = (await getCollection("gallery"))
-  .sort((a, b) => a.data.order - b.data.order)
-  .map((entry) => ({ src: entry.data.src, alt: entry.data.alt }));
+// Photos render in file order (the CMS controls order via drag-and-drop).
+const photos = (await getCollection("gallery")).map((entry) => ({
+  src: entry.data.src,
+  alt: entry.data.alt,
+}));
 ---
 
 <BaseLayout

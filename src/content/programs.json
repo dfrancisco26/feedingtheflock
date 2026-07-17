@@ -1,7 +1,6 @@
 [
   {
     "id": "drive-through-distributions",
-    "order": 1,
     "title": "Drive-Through Food Distributions",
     "description": "Feeding the Flock SD hosts drive-through food distributions designed to make support convenient, respectful, and easy to access. Families remain in their cars while volunteers load food boxes directly into their trunks.",
     "points": [
@@ -12,7 +11,6 @@
   },
   {
     "id": "santee-senior-pantry",
-    "order": 2,
     "title": "Santee Senior Pantry",
     "description": "The Santee Senior Pantry gives older adults a welcoming, dignified way to access nutritious food. Seniors can choose grocery items that fit their needs, rather than receiving only a pre-packed box.",
     "points": [
@@ -23,7 +21,6 @@
   },
   {
     "id": "emergency-pantry",
-    "order": 3,
     "title": "Emergency Pantry",
     "description": "Feeding the Flock SD helps provide emergency food assistance through a pantry at the La Mesa Veterans' Club for neighbors facing urgent or unexpected needs.",
     "points": [
@@ -34,7 +31,6 @@
   },
   {
     "id": "homeless-outreach",
-    "order": 4,
     "title": "Homeless Outreach",
     "description": "Our homeless outreach provides practical care for people experiencing homelessness, including food, basic supplies, and compassionate connection.",
     "points": [
@@ -45,7 +41,6 @@
   },
   {
     "id": "school-partnerships",
-    "order": 5,
     "title": "School Partnerships",
     "description": "Feeding the Flock SD partners with a local school to help provide food support for students and families who may need extra help.",
     "points": [
@@ -56,7 +51,6 @@
   },
   {
     "id": "mexico-outreach",
-    "order": 6,
     "title": "Mexico Outreach",
     "description": "Feeding the Flock SD also supports missionary and charity work in Mexico, extending care through food assistance, children's programs, and outreach.",
     "points": [

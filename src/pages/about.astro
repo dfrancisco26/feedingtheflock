@@ -3,14 +3,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import PointsCard from "../components/PointsCard.astro";
 import { getCollection } from "astro:content";
 
-const byOrder = (a: { data: { order: number } }, b: { data: { order: number } }) =>
-  a.data.order - b.data.order;
-
-const programs = (await getCollection("programs")).sort(byOrder);
-const locations = (await getCollection("locations")).sort(byOrder);
-const partners = (await getCollection("partners")).sort(byOrder);
+// Collections render in file order (the CMS controls order via drag-and-drop).
+const programs = await getCollection("programs");
+const locations = await getCollection("locations");
+const partners = await getCollection("partners");
 // Show a short teaser here; the full album lives on /gallery.html.
-const galleryPreview = (await getCollection("gallery")).sort(byOrder).slice(0, 6);
+const galleryPreview = (await getCollection("gallery")).slice(0, 6);
 ---
 
 <BaseLayout

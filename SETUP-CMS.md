@@ -106,25 +106,30 @@ files on disk (no commit); review and commit them with Git as usual.
 What's editable
 ---------------
 
-| Dashboard section | File |
-| --- | --- |
-| Site Settings → Site Details | `src/data/site.json` |
-| Site Settings → Impact Stats | `src/data/impact.json` |
-| Content → Programs | `src/content/programs.json` |
-| Content → Locations | `src/content/locations.json` |
-| Content → Partners | `src/content/partners.json` |
-| Content → Gallery Photos | `src/content/gallery.json` |
-| Content → Events | `src/content/events.json` |
+The dashboard sidebar has these sections:
 
-Notes for editors:
+| Dashboard section | What it controls | File |
+| --- | --- | --- |
+| **Events / Calendar** | Events shown on the calendar | `src/content/events.json` |
+| **Photos** | Gallery photos | `src/content/gallery.json` |
+| **Impact Numbers** | The three homepage stats | `src/data/impact.json` |
+| **Site Details** | Org info, donation methods, contacts | `src/data/site.json` |
+| **About Page** | Programs, locations, partner logos | `src/content/*.json` |
 
-- **ID fields** must stay unique and use `lowercase-hyphen` form (no spaces).
-  They key the content internally — changing one is like renaming the item.
-- **Order** controls the display order on the page (lowest first).
-- **Images**: use the picker to choose an existing image or upload a new one.
-  New uploads are committed under `public/images/`. When adding gallery photos in
-  bulk, dropping the files into `public/images/photos/` in Git first keeps them
-  tidily grouped.
-- **Events** come in three kinds — *Weekly*, *Monthly (Nth weekday)*, and
-  *Specific dates* — chosen when you add an event. Weekday is `0`=Sunday …
-  `6`=Saturday.
+The dashboard is built for non-technical editors:
+
+- **No ID or "order" fields.** Internal IDs are created automatically and stay
+  hidden. To change the order of things (photos, programs, locations, partners),
+  just **drag the items up or down** — the page follows that order.
+- **Adding an event**: click **Add**, then pick how it repeats —
+  *every week*, *monthly (e.g. the 4th Wednesday)*, or *on specific date(s)*.
+  The day of the week is a plain dropdown, and specific dates use a calendar
+  picker. No codes to remember.
+- **Adding a photo**: click **Add**, choose or upload the image, and write a
+  short description of what's in it (this is read aloud by screen readers, so
+  describe the scene simply). New uploads are committed under `public/images/`.
+- **Publishing**: every save commits to GitHub and the site redeploys
+  automatically — usually live within a minute or two.
+- The one place an ID is visible is **Site Details → Payment methods**, where a
+  small "ID (do not change)" field links each button to its QR code. Leave it
+  alone unless you're adding a brand-new payment method.

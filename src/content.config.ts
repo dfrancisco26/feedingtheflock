@@ -2,12 +2,12 @@ import { defineCollection, z } from "astro:content";
 import { file } from "astro/loaders";
 
 // Each collection is a single JSON array; every item needs a unique `id`.
-// `order` controls display order on the page (ascending).
+// Display order follows the order of items in the file (the CMS reorders them
+// by drag-and-drop), so there is no explicit `order` field.
 
 const programs = defineCollection({
   loader: file("src/content/programs.json"),
   schema: z.object({
-    order: z.number().default(0),
     title: z.string(),
     description: z.string(),
     points: z.array(z.string()).default([]),
@@ -17,7 +17,6 @@ const programs = defineCollection({
 const locations = defineCollection({
   loader: file("src/content/locations.json"),
   schema: z.object({
-    order: z.number().default(0),
     title: z.string(),
     description: z.string(),
     points: z.array(z.string()).default([]),
@@ -27,7 +26,6 @@ const locations = defineCollection({
 const partners = defineCollection({
   loader: file("src/content/partners.json"),
   schema: z.object({
-    order: z.number().default(0),
     name: z.string(),
     logo: z.string(),
   }),
@@ -36,7 +34,6 @@ const partners = defineCollection({
 const gallery = defineCollection({
   loader: file("src/content/gallery.json"),
   schema: z.object({
-    order: z.number().default(0),
     src: z.string(),
     alt: z.string(),
   }),

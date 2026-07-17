@@ -30,8 +30,16 @@ phase of the migration.
   allows editing against the local working copy with no login.
 - **Added** `SETUP-CMS.md` — one-time OAuth App + Worker setup plus an editor
   guide.
-- No change to the rendered site or its data: the dashboard reads and writes the
-  same files the pages already consume.
+- **Tuned for non-technical editors**: internal `id` fields are hidden and
+  auto-generated (`{{uuid_shorter}}`); events use plain-language pickers (day-of-
+  week and occurrence dropdowns, a calendar date picker) instead of numeric
+  codes; friendly labels and hints throughout; the sidebar leads with the
+  most-used sections (Events, Photos, Impact Numbers).
+- **Removed the explicit `order` field** from the `programs`, `locations`,
+  `partners`, and `gallery` collections (data, schemas, and page sorts).
+  Display order now follows the order of items in each file, which the dashboard
+  controls by drag-and-drop — verified that Astro's `file()` loader preserves
+  array order.
 
 ### Phase 4 — Wide gallery album + React lightbox (2026-07-07)
 
