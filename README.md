@@ -90,7 +90,9 @@ edit it two ways:
 
 1. **Admin dashboard** (recommended for non-developers) — the Sveltia CMS at
    **`/admin/`**, editing through forms. See [`SETUP-CMS.md`](SETUP-CMS.md) for
-   the one-time GitHub login setup and a local, no-login editing mode.
+   the one-time GitHub login setup and a local, no-login editing mode, and
+   [`EDITOR-GUIDE.md`](EDITOR-GUIDE.md) for a plain-language, step-by-step guide
+   to using the dashboard.
 2. **Directly in the files** below:
 
 - **Org info, socials, donation methods, food-box form link, contacts** —

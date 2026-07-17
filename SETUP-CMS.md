@@ -83,6 +83,44 @@ to the `dfrancisco26/feedingtheflock` repo.
 
 ---
 
+For the editor: first-time GitHub setup
+---------------------------------------
+
+Each person who edits the site logs in with a free GitHub account (that's just
+how the login and saving work — no code or Git knowledge is needed). This is a
+one-time, ~5-minute setup. There are two people involved: the **editor** (the
+person who will make edits) and the **owner** (whoever manages the GitHub repo).
+
+**Editor — create a GitHub account (skip if you already have one):**
+
+1. Go to <https://github.com/signup>.
+2. Enter your email, pick a password and a username, and verify your email.
+3. The free plan is all you need — you can stop at any "choose a plan" step.
+4. Tell the owner your GitHub **username** (or the email you signed up with).
+
+**Owner — invite the editor to the repo:**
+
+1. Go to
+   <https://github.com/dfrancisco26/feedingtheflock/settings/access>.
+2. Click **Add people**, enter the editor's username or email, and select them.
+3. Choose the **Write** role, then send the invite.
+
+**Editor — accept the invite and log in:**
+
+1. Check your email for "invited you to collaborate" and click **View
+   invitation → Accept**. (Or open <https://github.com/notifications>.)
+2. Go to `https://feedingtheflocksd.org/admin/`.
+3. Click **Login with GitHub**. The first time, GitHub asks you to **Authorize**
+   the app — click the green button.
+4. You're in. See [`EDITOR-GUIDE.md`](EDITOR-GUIDE.md) for how to use the
+   dashboard.
+
+> Prefer not to create a personal account? The owner can instead make one shared
+> account (e.g. `feedingtheflock-editor`), add it as a collaborator, and share
+> the login. Simpler, but every change is attributed to that shared name.
+
+---
+
 Local editing
 -------------
 
