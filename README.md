@@ -30,6 +30,9 @@ Project Structure
 ```
 public/
   images/              Static images, served at /images/... (logos, photos, QR codes)
+  admin/               Sveltia CMS dashboard (served at /admin/)
+    index.html         Loads the CMS
+    config.yml         Maps every content file to an editor form
 src/
   data/                Site-wide singletons (imported directly)
     site.json          Org info, socials, donation methods, form URL, contacts
@@ -82,8 +85,13 @@ How It Works
 Editing Content
 ---------------
 
-Most editable content now lives in data files, separate from the page markup.
-Until the admin dashboard lands (Phase 5), edit these files directly:
+Editable content lives in data files, separate from the page markup. You can
+edit it two ways:
+
+1. **Admin dashboard** (recommended for non-developers) — the Sveltia CMS at
+   **`/admin/`**, editing through forms. See [`SETUP-CMS.md`](SETUP-CMS.md) for
+   the one-time GitHub login setup and a local, no-login editing mode.
+2. **Directly in the files** below:
 
 - **Org info, socials, donation methods, food-box form link, contacts** —
   `src/data/site.json`.
@@ -118,11 +126,15 @@ Hosted on **Cloudflare Pages**, deploying from GitHub.
 Also confirm the production domain in `astro.config.mjs` (`site`) so Open Graph
 and canonical URLs are correct.
 
-Roadmap
--------
+Status
+------
 
-- **Phase 5** — Admin dashboard via a Git-based CMS with GitHub login, editing
-  the files under `src/content/` and `src/data/`.
+All five migration phases are complete. Two items remain before merging
+`astro-migration` to `main`:
+
+- **Review the gallery alt text** for the 19 photos added in Phase 4 (editable
+  under Content → Gallery Photos in the dashboard).
+- **Finish the CMS auth setup** — see [`SETUP-CMS.md`](SETUP-CMS.md).
 
 Image hosting on Cloudinary is deferred; photos stay in `public/images/` for now.
 

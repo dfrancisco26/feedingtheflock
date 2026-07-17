@@ -9,6 +9,30 @@ See the phased plan for the full roadmap.
 
 ## [Unreleased] — `astro-migration` branch
 
+### Phase 5 — Admin dashboard (Sveltia CMS) (2026-07-08)
+
+Added a Git-based content-management dashboard so non-technical editors can
+update the site through forms — no code, no database. This is the final planned
+phase of the migration.
+
+- **Added** `/admin/` — [Sveltia CMS](https://github.com/sveltia/sveltia-cms)
+  (a modern Decap/Netlify CMS successor), loaded from
+  `public/admin/index.html`.
+- **Added** `public/admin/config.yml` mapping every content file to an editor
+  form: `site.json` and `impact.json` under **Site Settings**, and `programs`,
+  `locations`, `partners`, `gallery`, and `events` under **Content**. Top-level
+  JSON arrays use the List widget's `root: true`; events use variable types
+  keyed on `type`. Field order mirrors the existing JSON so edits produce clean
+  diffs, and the config's fields were verified to cover every key so nothing is
+  dropped on save.
+- **Auth**: GitHub OAuth through a Cloudflare Worker relay (`sveltia-cms-auth`);
+  each save commits to `main` and triggers a deploy. `local_backend: true` also
+  allows editing against the local working copy with no login.
+- **Added** `SETUP-CMS.md` — one-time OAuth App + Worker setup plus an editor
+  guide.
+- No change to the rendered site or its data: the dashboard reads and writes the
+  same files the pages already consume.
+
 ### Phase 4 — Wide gallery album + React lightbox (2026-07-07)
 
 Added a dedicated photo gallery with a full-screen viewer. This introduces the
@@ -125,10 +149,17 @@ site looks and behaves the same; the structure underneath is now componentized.
   output directory** to `dist`. Until then, `main` continues to deploy the
   original static site unchanged.
 
-## Roadmap (not yet started)
+## Roadmap
 
-- **Phase 5** — Admin dashboard (Git-based CMS) with GitHub OAuth login, editing
-  the `src/content` and `src/data` files.
+All five planned phases are complete. Before the `astro-migration` branch merges
+to `main`, two items still need a human:
+
+- **Review the gallery alt text** — the 19 photos added in Phase 4 have
+  provisional descriptions (editable in the new dashboard under Content →
+  Gallery Photos).
+- **Complete the CMS one-time auth setup** — create the GitHub OAuth App and
+  deploy the auth Worker, then set `base_url` in `public/admin/config.yml`
+  (see `SETUP-CMS.md`).
 
 Image hosting on Cloudinary is deferred; photos stay in `public/images/` and are
 optimized/compressed manually for now.
