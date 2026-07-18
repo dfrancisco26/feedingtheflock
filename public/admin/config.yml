@@ -14,7 +14,7 @@ backend:
   branch: main
   # OAuth relay (Cloudflare Worker). Replace with your deployed worker URL,
   # no trailing slash and no "/callback". See SETUP-CMS.md.
-  base_url: https://YOUR-AUTH-WORKER.workers.dev
+  base_url: https://sveltia-cms-auth.dfrancisco2677.workers.dev
 
 # Enables local editing against your working copy without a GitHub login.
 # Run `npx @sveltia/cms-proxy-server` (or `npx decap-server`) alongside
