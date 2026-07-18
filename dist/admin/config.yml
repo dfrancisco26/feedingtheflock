@@ -1,0 +1,315 @@
+# Sveltia CMS configuration — Feeding the Flock SD admin dashboard.
+# Editors change site content through simple forms; every save is a Git commit
+# on the branch below, which triggers a new Cloudflare Pages deploy.
+# Docs: https://github.com/sveltia/sveltia-cms   Setup: see SETUP-CMS.md
+#
+# Designed for non-technical editors:
+#   - Internal IDs are hidden and generated automatically.
+#   - Lists are ordered by drag-and-drop (no "order number" to manage).
+#   - Events use plain-language day/week pickers and a calendar date picker.
+
+backend:
+  name: github
+  repo: dfrancisco26/feedingtheflock
+  branch: main
+  # OAuth relay (Cloudflare Worker). Replace with your deployed worker URL,
+  # no trailing slash and no "/callback". See SETUP-CMS.md.
+  base_url: https://YOUR-AUTH-WORKER.workers.dev
+
+# Enables local editing against your working copy without a GitHub login.
+# Run `npx @sveltia/cms-proxy-server` (or `npx decap-server`) alongside
+# `npm run dev`, then open http://localhost:4321/admin/index.html
+local_backend: true
+
+# Uploaded images are committed under media_folder; the site references them
+# by the public_folder path. Existing images keep their stored paths on edit.
+media_folder: "public/images"
+public_folder: "/images"
+
+site_url: https://feedingtheflocksd.org
+logo_url: /images/logo_2026.png
+
+collections:
+  # ==================================================================
+  # EVENTS — the most-used section, kept first.
+  # ==================================================================
+  - name: events
+    label: "Events / Calendar"
+    icon: event
+    description: "Add and edit the events shown on the calendar."
+    editor:
+      preview: false
+    files:
+      - name: events
+        label: "Events"
+        file: "src/content/events.json"
+        icon: event
+        fields:
+          - name: events
+            label: "Event"
+            label_singular: "Event"
+            widget: list
+            root: true
+            typeKey: type
+            summary: "{{fields.title}}"
+            types:
+              - name: weekly
+                label: "Repeats every week"
+                summary: "{{fields.title}} (weekly)"
+                fields:
+                  - { name: id, widget: hidden, default: "{{uuid_shorter}}" }
+                  - { name: title, label: "Event name", widget: string }
+                  - name: weekday
+                    label: "Day of the week"
+                    widget: select
+                    options:
+                      - { label: "Sunday", value: 0 }
+                      - { label: "Monday", value: 1 }
+                      - { label: "Tuesday", value: 2 }
+                      - { label: "Wednesday", value: 3 }
+                      - { label: "Thursday", value: 4 }
+                      - { label: "Friday", value: 5 }
+                      - { label: "Saturday", value: 6 }
+                  - { name: time, label: "Time", widget: string, hint: "For example: 8:30 AM" }
+                  - { name: description, label: "Short description", widget: text, required: false }
+              - name: monthlyNthWeekday
+                label: "Repeats monthly (e.g. 4th Wednesday)"
+                summary: "{{fields.title}} (monthly)"
+                fields:
+                  - { name: id, widget: hidden, default: "{{uuid_shorter}}" }
+                  - { name: title, label: "Event name", widget: string }
+                  - name: nth
+                    label: "Which occurrence each month"
+                    widget: select
+                    options:
+                      - { label: "First", value: 1 }
+                      - { label: "Second", value: 2 }
+                      - { label: "Third", value: 3 }
+                      - { label: "Fourth", value: 4 }
+                      - { label: "Fifth", value: 5 }
+                  - name: weekday
+                    label: "Day of the week"
+                    widget: select
+                    options:
+                      - { label: "Sunday", value: 0 }
+                      - { label: "Monday", value: 1 }
+                      - { label: "Tuesday", value: 2 }
+                      - { label: "Wednesday", value: 3 }
+                      - { label: "Thursday", value: 4 }
+                      - { label: "Friday", value: 5 }
+                      - { label: "Saturday", value: 6 }
+                  - { name: time, label: "Time", widget: string, hint: "For example: 4:00-6:00 PM" }
+                  - { name: description, label: "Short description", widget: text, required: false }
+              - name: dates
+                label: "On specific date(s)"
+                summary: "{{fields.title}} (specific dates)"
+                fields:
+                  - { name: id, widget: hidden, default: "{{uuid_shorter}}" }
+                  - { name: title, label: "Event name", widget: string }
+                  - { name: time, label: "Time", widget: string, hint: "For example: Time TBD" }
+                  - { name: description, label: "Short description", widget: text, required: false }
+                  - name: dates
+                    label: "Date(s)"
+                    label_singular: "Date"
+                    widget: list
+                    field: { name: date, label: "Date", widget: datetime, type: date }
+
+  # ==================================================================
+  # PHOTOS — gallery. Upload an image, write a short description.
+  # ==================================================================
+  - name: photos
+    label: "Photos"
+    icon: photo_library
+    description: "Add photos to the gallery. Drag to reorder."
+    editor:
+      preview: false
+    files:
+      - name: gallery
+        label: "Gallery"
+        file: "src/content/gallery.json"
+        icon: photo_library
+        fields:
+          - name: photos
+            label: "Photo"
+            label_singular: "Photo"
+            widget: list
+            root: true
+            summary: "{{fields.alt}}"
+            fields:
+              - { name: id, widget: hidden, default: "{{uuid_shorter}}" }
+              - { name: src, label: "Photo", widget: image }
+              - name: alt
+                label: "Describe this photo"
+                widget: string
+                hint: "A short sentence describing what's in the photo (used for accessibility and screen readers). For example: Volunteers packing food boxes on a distribution day."
+
+  # ==================================================================
+  # IMPACT NUMBERS — the three homepage stats.
+  # ==================================================================
+  - name: impact
+    label: "Impact Numbers"
+    icon: insights
+    description: "The impact numbers on the homepage."
+    editor:
+      preview: false
+    files:
+      - name: impact
+        label: "Homepage Impact Numbers"
+        file: "src/data/impact.json"
+        icon: insights
+        fields:
+          - { name: eyebrow, label: "Small label above the heading", widget: string }
+          - { name: heading, label: "Heading", widget: string }
+          - { name: subheading, label: "Subheading", widget: text }
+          - name: stats
+            label: "Number"
+            label_singular: "Number"
+            widget: list
+            summary: "{{fields.label}}"
+            fields:
+              - { name: id, widget: hidden, default: "{{uuid_shorter}}" }
+              - { name: target, label: "The number", widget: number, value_type: int, hint: "Digits only, no commas (e.g. 79595)" }
+              - { name: suffix, label: "Symbol after the number (optional)", widget: string, required: false, hint: "For example: +" }
+              - { name: label, label: "What it counts", widget: text }
+
+  # ==================================================================
+  # SITE DETAILS — org info, donation methods, contacts.
+  # ==================================================================
+  - name: site
+    label: "Site Details"
+    icon: settings
+    description: "Organization info, donation methods, and contacts."
+    editor:
+      preview: false
+    files:
+      - name: site
+        label: "Site Details"
+        file: "src/data/site.json"
+        icon: settings
+        fields:
+          - { name: name, label: "Organization name", widget: string }
+          - { name: tagline, label: "Tagline", widget: string }
+          - { name: ein, label: "EIN", widget: string }
+          - { name: nonprofitDisclosure, label: "Nonprofit disclosure text", widget: text }
+          - { name: logo, label: "Logo", widget: image }
+          - { name: email, label: "Contact email", widget: string }
+          - name: address
+            label: "Mailing address"
+            widget: object
+            fields:
+              - { name: line1, label: "Street", widget: string }
+              - { name: city, label: "City", widget: string }
+              - { name: state, label: "State", widget: string }
+              - { name: zip, label: "ZIP", widget: string }
+          - name: social
+            label: "Social links"
+            widget: object
+            fields:
+              - { name: facebook, label: "Facebook URL", widget: string, required: false }
+              - { name: instagram, label: "Instagram URL", widget: string, required: false }
+          - { name: foodBoxFormUrl, label: "Food box sign-up form URL", widget: string, required: false }
+          - name: donation
+            label: "Donation"
+            widget: object
+            fields:
+              - name: methods
+                label: "Payment methods"
+                label_singular: "Payment method"
+                widget: list
+                summary: "{{fields.title}}"
+                fields:
+                  - { name: id, label: "ID (do not change)", widget: string, hint: "Used internally to link the button to its QR code. Lowercase, no spaces." }
+                  - { name: title, label: "Title", widget: string }
+                  - { name: enabled, label: "Show on site", widget: boolean, default: true }
+                  - { name: link, label: "Link URL", widget: string }
+                  - { name: linkText, label: "Link button text", widget: string }
+                  - { name: logo, label: "Logo image", widget: image }
+                  - { name: logoClass, label: "Logo CSS class", widget: string, required: false }
+                  - { name: qr, label: "QR code image", widget: image }
+                  - { name: blurb, label: "Short description", widget: text }
+              - name: check
+                label: "Check donations"
+                widget: object
+                fields:
+                  - { name: payableTo, label: "Payable to", widget: string }
+                  - name: mailTo
+                    label: "Mailing address lines"
+                    widget: list
+                    field: { name: line, label: "Line", widget: string }
+          - name: contacts
+            label: "Contacts / board"
+            label_singular: "Contact"
+            widget: list
+            summary: "{{fields.name}} — {{fields.role}}"
+            fields:
+              - { name: name, label: "Name", widget: string }
+              - { name: role, label: "Role", widget: string }
+              - { name: email, label: "Email", widget: string }
+
+  # ==================================================================
+  # ABOUT PAGE — programs, locations, partners. Drag to reorder.
+  # ==================================================================
+  - name: aboutpage
+    label: "About Page"
+    icon: description
+    description: "Programs, locations, and partner logos on the About page."
+    editor:
+      preview: false
+    files:
+      - name: programs
+        label: "Programs"
+        file: "src/content/programs.json"
+        icon: category
+        fields:
+          - name: programs
+            label: "Program"
+            label_singular: "Program"
+            widget: list
+            root: true
+            summary: "{{fields.title}}"
+            fields:
+              - { name: id, widget: hidden, default: "{{uuid_shorter}}" }
+              - { name: title, label: "Title", widget: string }
+              - { name: description, label: "Description", widget: text }
+              - name: points
+                label: "Bullet points"
+                label_singular: "Point"
+                widget: list
+                field: { name: point, label: "Point", widget: string }
+
+      - name: locations
+        label: "Locations"
+        file: "src/content/locations.json"
+        icon: place
+        fields:
+          - name: locations
+            label: "Location"
+            label_singular: "Location"
+            widget: list
+            root: true
+            summary: "{{fields.title}}"
+            fields:
+              - { name: id, widget: hidden, default: "{{uuid_shorter}}" }
+              - { name: title, label: "Title", widget: string }
+              - { name: description, label: "Description", widget: text }
+              - name: points
+                label: "Bullet points"
+                label_singular: "Point"
+                widget: list
+                field: { name: point, label: "Point", widget: string }
+
+      - name: partners
+        label: "Partners"
+        file: "src/content/partners.json"
+        icon: handshake
+        fields:
+          - name: partners
+            label: "Partner"
+            label_singular: "Partner"
+            widget: list
+            root: true
+            summary: "{{fields.name}}"
+            fields:
+              - { name: id, widget: hidden, default: "{{uuid_shorter}}" }
+              - { name: name, label: "Name", widget: string }
+              - { name: logo, label: "Logo image", widget: image }
