@@ -1178,9 +1178,17 @@ textarea {
 /* Fundraiser (temporary) — remove with the #fundraiser section on     */
 /* events.html after the event.                                        */
 /* ------------------------------------------------------------------ */
-.fundraiser-card {
-  max-width: 640px;
+.fundraiser-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  max-width: 960px;
   margin: 0 auto;
+}
+
+.fundraiser-card {
+  margin: 0;
 }
 
 .fundraiser-details {
@@ -1206,20 +1214,31 @@ textarea {
 }
 
 .fundraiser-flyer {
-  margin: 2rem auto 0;
+  margin: 0;
   text-align: center;
 }
 
 .fundraiser-flyer img {
   width: 100%;
-  max-width: 420px;
+  max-width: 360px;
   height: auto;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
 }
 
 .fundraiser-flyer figcaption {
-  margin-top: 0.6rem;
+  margin: 0.6rem auto 0;
+  padding: 0;
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+
+@media (max-width: 720px) {
+  .fundraiser-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }
 
 @media (max-width: 560px) {
