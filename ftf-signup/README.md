@@ -107,7 +107,10 @@ attempted, and the send runs in `waitUntil` after the response has gone out.
    ```
 
 2. **Turnstile** — in the dashboard, create a widget for your domain. Put the
-   site key into the `data-sitekey` attribute in `index.html`.
+   site key into the `data-sitekey` attribute in `index.html` (already set to
+   `0x4AAAAAAEnchRw9eIZnSXbK`), and its secret key into `TURNSTILE_SECRET`
+   below. Both halves are required: a deployed site missing the secret refuses
+   every signup rather than accepting them unchecked.
 
 3. **Deploy**
 
@@ -121,7 +124,7 @@ attempted, and the send runs in `waitUntil` after the response has gone out.
 
    | Name | Purpose |
    |---|---|
-   | `TURNSTILE_SECRET` | bot check; signup rejects without it if set |
+   | `TURNSTILE_SECRET` | **required** — bot check; signups fail closed without it |
    | `IP_SALT` | any long random string, for hashed abuse logging |
    | `CF_ACCOUNT_ID` | `9c17edb50bf42a236245b52f9a323953` |
    | `EMAIL_API_TOKEN` | API token with **Email Sending: Edit** |
@@ -134,8 +137,11 @@ attempted, and the send runs in `waitUntil` after the response has gone out.
    The email ones degrade safely — leave any of `CF_ACCOUNT_ID`,
    `EMAIL_API_TOKEN`, or `FROM_EMAIL` unset and no confirmation is sent, but
    signups still save and are marked `Email not set up` in the CSV. The two
-   `ACCESS_*` variables are **not** optional: without them `/api/export`
-   refuses every request. That is deliberate, see below.
+   `ACCESS_*` variables and `TURNSTILE_SECRET` are **not** optional: without
+   the first two `/api/export` refuses every request, and without the third
+   `/api/signup` does. Both are deliberate — a missing secret must never
+   silently downgrade a protection. `TURNSTILE_SECRET` is skipped only on
+   `localhost`, so `wrangler pages dev` still works without it.
 
 5. **Protect the export** (step 6 below). Until you do, the CSV endpoint returns
    500 to everyone, including you. Signups work fine in the meantime.

@@ -189,8 +189,9 @@
       <p class="msg" id="families-msg" aria-live="polite"></p>
     </div>
 
-    <!-- Replace data-sitekey with your Turnstile site key -->
-    <div class="cf-turnstile" data-sitekey="YOUR_TURNSTILE_SITE_KEY"></div>
+    <!-- Turnstile site key. Public by design — it only names the widget; the
+         matching TURNSTILE_SECRET in the Pages environment does the verifying. -->
+    <div class="cf-turnstile" data-sitekey="0x4AAAAAAEnchRw9eIZnSXbK"></div>
 
     <button type="submit" id="submit" data-t="submit">Sign up</button>
   </form>
@@ -232,6 +233,9 @@ const T = {
     err_month_full: "This month is full. Check back at the start of next month.",
     err_duplicate: "That email is already signed up for this month. You're all set.",
     err_save_failed: "Something went wrong saving your signup. Please try again.",
+    // Server misconfiguration, not anything the visitor did. Say so plainly
+    // rather than inviting a retry that cannot succeed.
+    err_not_configured: "Signups are temporarily unavailable. Please try again later.",
     err_unknown: "Something went wrong. Please try again."
   },
   es: {
@@ -259,6 +263,7 @@ const T = {
     err_month_full: "Este mes ya está lleno. Vuelva a intentar a principios del próximo mes.",
     err_duplicate: "Ese correo ya está inscrito para este mes. Ya está todo listo.",
     err_save_failed: "Hubo un problema al guardar su inscripción. Intente de nuevo.",
+    err_not_configured: "Las inscripciones no están disponibles en este momento. Intente más tarde.",
     err_unknown: "Hubo un problema. Intente de nuevo."
   }
 };

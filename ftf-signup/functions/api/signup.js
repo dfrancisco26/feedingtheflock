@@ -1,7 +1,8 @@
 // POST /api/signup
 // Bindings: DB (D1)
-// Secrets:  TURNSTILE_SECRET, IP_SALT, CF_ACCOUNT_ID, EMAIL_API_TOKEN,
-//           FROM_EMAIL, FROM_NAME  (all optional; each degrades safely)
+// Secrets:  TURNSTILE_SECRET (required off localhost — fails closed),
+//           IP_SALT, CF_ACCOUNT_ID, EMAIL_API_TOKEN, FROM_EMAIL, FROM_NAME
+//           (the rest are optional; each degrades safely)
 //
 // This endpoint returns error *codes*, never prose. The browser owns all
 // user-facing wording in both languages (the `T` object in index.html), so the
@@ -47,6 +48,17 @@ export async function onRequestPost(context) {
   if (env.TURNSTILE_SECRET) {
     const ok = await verifyTurnstile(body.turnstile_token, env.TURNSTILE_SECRET, ip);
     if (!ok) return json({ code: "turnstile_failed" }, 400);
+  } else if (isLocalDev(request)) {
+    // Local `wrangler pages dev` has no secret to check against, so the form
+    // stays usable. Never reachable from a deployed origin — see below.
+    console.warn("TURNSTILE_SECRET unset; skipping bot check (local dev only).");
+  } else {
+    // Fail CLOSED, like lib/access.js. A deployed site with no secret would
+    // otherwise accept every submission with no bot check and no signal that
+    // anything was wrong — the form would look perfectly healthy while open
+    // to scripted mass signups.
+    console.error("TURNSTILE_SECRET is not set; refusing signups.");
+    return json({ code: "not_configured" }, 500);
   }
 
   // The month is decided here, never by the browser.
@@ -101,6 +113,14 @@ export async function onRequestPost(context) {
   purgeInBackground(context);
 
   return json({ ok: true, period }, 200);
+}
+
+// True only for `wrangler pages dev` on this machine. Deployed origins — the
+// custom domain and *.pages.dev alike — never match, so a missing secret in
+// production always fails closed rather than quietly disabling the bot check.
+function isLocalDev(request) {
+  const host = new URL(request.url).hostname;
+  return host === "localhost" || host === "127.0.0.1" || host === "[::1]";
 }
 
 async function verifyTurnstile(token, secret, ip) {
