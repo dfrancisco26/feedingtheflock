@@ -590,6 +590,28 @@ button:hover {
   border-radius: 0;
 }
 
+.flyer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.flyer-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.flyer-card img {
+  width: 100%;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+
 .payment-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

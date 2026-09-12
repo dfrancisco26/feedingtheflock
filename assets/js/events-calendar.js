@@ -30,14 +30,10 @@ const eventSources = [
   },
   {
     title: "Jamul Distribution Day",
-    time: "Time TBD",
+    time: "2:00-6:00 PM",
     type: "dates",
     description: "Drive-through food box distribution.",
     dates: [
-      "2026-05-19",
-      "2026-06-16",
-      "2026-07-21",
-      "2026-08-18",
       "2026-09-15",
       "2026-10-20",
       "2026-11-24",
@@ -45,15 +41,22 @@ const eventSources = [
     ],
   },
   {
-    title: "Fashion Show",
-    time: "Time TBD",
+    title: "Cigar & Whiskey Night",
+    time: "5:00-8:00 PM",
     type: "dates",
-    description: "Community fashion show event.",
-    dates: ["2026-05-30"],
+    description: "Hosted by Feeding the Flock SD at Excalibur Cigar & Scotch Lounge. $50 per person.",
+    dates: ["2026-10-13"],
+  },
+  {
+    title: "Cocktail Party",
+    time: "5:30-7:00 PM",
+    type: "dates",
+    description: "VIP reception for 20 guests at El Torito, supporting Feeding the Flock SD.",
+    dates: ["2026-11-05"],
   },
 ];
 
-const foodBoxFormUrl = "https://m.signupgenius.com/#!/showSignUp/10C0D4DAEAF28AAF9C52-63943411-lamesa";
+const foodBoxFormUrl = "https://www.signupgenius.com/go/10C0D4DAEAF28AAF9C52-65703393-sepfeeding#/";
 
 const calendarWindow = {
   monthsBack: 0,
