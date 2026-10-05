@@ -41,13 +41,6 @@ const eventSources = [
     ],
   },
   {
-    title: "Cigar & Whiskey Night",
-    time: "5:00-8:00 PM",
-    type: "dates",
-    description: "Hosted by Feeding the Flock SD at Excalibur Cigar & Scotch Lounge. $50 per person.",
-    dates: ["2026-10-13"],
-  },
-  {
     title: "Cocktail Party",
     time: "5:30-7:00 PM",
     type: "dates",
