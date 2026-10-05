@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Food distribution signup — Feeding the Flock SD</title>
+<meta name="description" content="Sign up for this month's food distribution with Feeding the Flock SD.">
+<style>
+  :root {
+    --ink: #1C2620;
+    --ink-soft: #55635B;
+    --field: #FFFFFF;
+    --page: #F7F4EC;
+    --line: #D3CDBE;
+    --green: #24513C;
+    --green-press: #17372A;
+    --amber: #C98A16;
+    --error: #9B2C1E;
+    --radius: 6px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--page);
+    color: var(--ink);
+    font: 17px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .wrap { max-width: 34rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+
+  header { border-bottom: 3px solid var(--amber); padding-bottom: 1.25rem; }
+
+  .org {
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+    color: var(--green);
+    font-weight: 600;
+    margin: 0 0 0.4rem;
+  }
+
+  h1 {
+    font-size: clamp(1.6rem, 6vw, 2.1rem);
+    line-height: 1.15;
+    font-weight: 700;
+    margin: 0 0 0.6rem;
+    letter-spacing: -0.015em;
+  }
+
+  .month { color: var(--green); }
+
+  .lede { margin: 0; color: var(--ink-soft); }
+
+  .lang {
+    background: none;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.35rem 0.85rem;
+    font: inherit;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    cursor: pointer;
+    margin-bottom: 1rem;
+  }
+  .lang:hover { border-color: var(--green); color: var(--green); }
+
+  form { margin-top: 1.75rem; }
+
+  .field { margin-bottom: 1.4rem; }
+
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+  }
+
+  .help {
+    display: block;
+    font-weight: 400;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    margin-top: -0.15rem;
+    margin-bottom: 0.45rem;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.8rem 0.85rem;
+    font: inherit;
+    color: var(--ink);
+    background: var(--field);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+
+  input:focus-visible {
+    outline: 3px solid var(--green);
+    outline-offset: 1px;
+    border-color: var(--green);
+  }
+
+  input[aria-invalid="true"] { border-color: var(--error); }
+
+  .msg { color: var(--error); font-size: 0.92rem; margin-top: 0.35rem; }
+  .msg:empty { display: none; }
+
+  .row { display: flex; gap: 0.9rem; }
+  .row .field { flex: 1; }
+
+  button[type="submit"] {
+    width: 100%;
+    padding: 0.95rem 1rem;
+    font: inherit;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: #fff;
+    background: var(--green);
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+  }
+  button[type="submit"]:hover { background: var(--green-press); }
+  button[type="submit"]:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
+  button[type="submit"][disabled] { opacity: 0.55; cursor: default; }
+
+  .status {
+    margin-top: 1.25rem;
+    padding: 1rem 1.1rem;
+    border-radius: var(--radius);
+    border-left: 4px solid var(--green);
+    background: #fff;
+  }
+  .status:empty { display: none; padding: 0; border: none; }
+  .status.bad { border-left-color: var(--error); }
+
+  .done h2 { margin: 0 0 0.4rem; font-size: 1.25rem; }
+  .done p { margin: 0; color: var(--ink-soft); }
+
+  .foot {
+    margin-top: 2.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
+
+  .cf-turnstile { margin-bottom: 1.4rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <button class="lang" type="button" id="lang">Español</button>
+
+  <header>
+    <p class="org" data-t="org">Feeding the Flock SD</p>
+    <h1><span data-t="h1">Food distribution signup for</span> <span class="month" id="month"></span></h1>
+    <p class="lede" data-t="lede">Fill this out once a month. We'll email you the date, time, and pickup location.</p>
+  </header>
+
+  <form id="form" novalidate>
+    <div class="row">
+      <div class="field">
+        <label for="first" data-t="first">First name</label>
+        <input id="first" name="first_name" autocomplete="given-name" required>
+        <p class="msg" id="first-msg" aria-live="polite"></p>
+      </div>
+      <div class="field">
+        <label for="last" data-t="last">Last name</label>
+        <input id="last" name="last_name" autocomplete="family-name" required>
+        <p class="msg" id="last-msg" aria-live="polite"></p>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="email" data-t="email">Email</label>
+      <span class="help" data-t="emailHelp">This is where your confirmation goes.</span>
+      <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required>
+      <p class="msg" id="email-msg" aria-live="polite"></p>
+    </div>
+
+    <div class="field">
+      <label for="families" data-t="families">How many families are you picking up for?</label>
+      <span class="help" data-t="familiesHelp">Count your own household too. Enter 1 if it's just yours.</span>
+      <input id="families" name="families" type="number" inputmode="numeric"
+             min="1" max="10" step="1" value="1" required>
+      <p class="msg" id="families-msg" aria-live="polite"></p>
+    </div>
+
+    <!-- Turnstile site key. Public by design — it only names the widget; the
+         matching TURNSTILE_SECRET in the Pages environment does the verifying. -->
+    <div class="cf-turnstile" data-sitekey="0x4AAAAAAEnchRw9eIZnSXbK"></div>
+
+    <button type="submit" id="submit" data-t="submit">Sign up</button>
+  </form>
+
+  <div class="status" id="status" role="status" aria-live="polite"></div>
+
+  <p class="foot" data-t="foot">
+    Questions? Reply to your confirmation email and we'll get back to you.
+  </p>
+</div>
+
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script>
+const T = {
+  en: {
+    org: "Feeding the Flock SD",
+    h1: "Food distribution signup for",
+    lede: "Fill this out once a month. We'll email you the date, time, and pickup location.",
+    first: "First name", last: "Last name", email: "Email",
+    emailHelp: "This is where your confirmation goes.",
+    families: "How many families are you picking up for?",
+    familiesHelp: "Count your own household too. Enter 1 if it's just yours.",
+    submit: "Sign up", sending: "Signing up\u2026",
+    foot: "Questions? Reply to your confirmation email and we'll get back to you.",
+    doneH: "You're signed up.", doneP: "Check your email for a confirmation.",
+    offline: "We couldn't reach the server. Check your connection and try again.",
+    other: "English",
+
+    // Field-level codes from the API.
+    f_required: "This one's required.",
+    f_email_invalid: "Enter an email address we can reach you at.",
+    f_families_range: "Enter a number between 1 and {max}.",
+
+    // Top-level codes from the API.
+    err_check_fields: "Check the highlighted fields.",
+    err_bad_request: "We couldn't read that submission. Please try again.",
+    err_turnstile_failed: "That check didn't pass. Reload the page and try once more.",
+    err_month_closed: "Signups for this month are closed.",
+    err_month_full: "This month is full. Check back at the start of next month.",
+    err_duplicate: "That email is already signed up for this month. You're all set.",
+    err_save_failed: "Something went wrong saving your signup. Please try again.",
+    // Server misconfiguration, not anything the visitor did. Say so plainly
+    // rather than inviting a retry that cannot succeed.
+    err_not_configured: "Signups are temporarily unavailable. Please try again later.",
+    err_unknown: "Something went wrong. Please try again."
+  },
+  es: {
+    org: "Feeding the Flock SD",
+    h1: "Inscripción para la distribución de alimentos de",
+    lede: "Llene esto una vez al mes. Le enviaremos por correo la fecha, la hora y el lugar de entrega.",
+    first: "Nombre", last: "Apellido", email: "Correo electrónico",
+    emailHelp: "Aquí le enviaremos su confirmación.",
+    families: "¿Para cuántas familias va a recoger?",
+    familiesHelp: "Incluya su propio hogar. Escriba 1 si es solo el suyo.",
+    submit: "Inscribirse", sending: "Enviando\u2026",
+    foot: "¿Preguntas? Responda al correo de confirmación y le contestaremos.",
+    doneH: "Ya está inscrito.", doneP: "Revise su correo para ver la confirmación.",
+    offline: "No pudimos conectar con el servidor. Revise su conexión e intente de nuevo.",
+    other: "Español",
+
+    f_required: "Este campo es obligatorio.",
+    f_email_invalid: "Escriba un correo electrónico donde podamos comunicarnos con usted.",
+    f_families_range: "Escriba un número entre 1 y {max}.",
+
+    err_check_fields: "Revise los campos marcados.",
+    err_bad_request: "No pudimos leer su inscripción. Intente de nuevo.",
+    err_turnstile_failed: "No se completó la verificación. Recargue la página e intente otra vez.",
+    err_month_closed: "Las inscripciones de este mes están cerradas.",
+    err_month_full: "Este mes ya está lleno. Vuelva a intentar a principios del próximo mes.",
+    err_duplicate: "Ese correo ya está inscrito para este mes. Ya está todo listo.",
+    err_save_failed: "Hubo un problema al guardar su inscripción. Intente de nuevo.",
+    err_not_configured: "Las inscripciones no están disponibles en este momento. Intente más tarde.",
+    err_unknown: "Hubo un problema. Intente de nuevo."
+  }
+};
+
+let lang = (navigator.language || "en").toLowerCase().startsWith("es") ? "es" : "en";
+
+const $ = (id) => document.getElementById(id);
+const form = $("form"), status = $("status"), submit = $("submit");
+
+function monthLabel() {
+  return new Intl.DateTimeFormat(lang === "es" ? "es-US" : "en-US", {
+    month: "long", year: "numeric", timeZone: "America/Los_Angeles"
+  }).format(new Date());
+}
+
+// What the status box is currently showing, so switching language after a
+// submit re-renders it instead of leaving stale text in the other language.
+let shown = null;  // null | {kind:"done"} | {kind:"error", data:{...}}
+
+function render() {
+  document.documentElement.lang = lang;
+  const t = T[lang];
+  document.querySelectorAll("[data-t]").forEach((el) => {
+    if (t[el.dataset.t]) el.textContent = t[el.dataset.t];
+  });
+  $("month").textContent = monthLabel();
+  $("lang").textContent = lang === "en" ? "Español" : "English";
+  if (shown) paint(shown);
+}
+
+// Resolve an API error code into text this page owns. The server never sends
+// prose — except periods.note, copy an admin wrote for a closed month.
+function errorText(data) {
+  const t = T[lang];
+  if (data.code === "month_closed" && data.note) return data.note;
+  return t["err_" + data.code] || t.err_unknown;
+}
+
+function fieldText(code, data) {
+  const t = T[lang];
+  const text = t["f_" + code];
+  if (!text) return t.err_unknown;
+  return text.replace("{max}", data.max ?? 10);
+}
+
+function paint(state) {
+  shown = state;
+  if (state.kind === "done") {
+    status.className = "status done";
+    status.innerHTML = "";
+    const h = document.createElement("h2");
+    h.textContent = T[lang].doneH;
+    const p = document.createElement("p");
+    p.textContent = T[lang].doneP;
+    status.append(h, p);
+    return;
+  }
+
+  const data = state.data;
+  status.className = "status bad";
+  status.textContent = data.offline ? T[lang].offline : errorText(data);
+
+  if (data.fields) {
+    let firstBad = true;
+    for (const [key, code] of Object.entries(data.fields)) {
+      const id = FIELD_IDS[key];
+      if (!id) continue;
+      $(id + "-msg").textContent = fieldText(code, data);
+      $(id).setAttribute("aria-invalid", "true");
+      if (firstBad && state.focus) { $(id).focus(); firstBad = false; }
+    }
+  }
+}
+
+$("lang").addEventListener("click", () => {
+  lang = lang === "en" ? "es" : "en";
+  render();
+});
+
+function clearErrors() {
+  ["first", "last", "email", "families"].forEach((k) => {
+    $(k + "-msg").textContent = "";
+    $(k).removeAttribute("aria-invalid");
+  });
+  shown = null;
+  status.textContent = "";
+  status.className = "status";
+}
+
+const FIELD_IDS = { first_name: "first", last_name: "last", email: "email", families: "families" };
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  clearErrors();
+  submit.disabled = true;
+  submit.textContent = T[lang].sending;
+
+  const tokenEl = form.querySelector('[name="cf-turnstile-response"]');
+  const payload = {
+    first_name: $("first").value,
+    last_name: $("last").value,
+    email: $("email").value,
+    families: $("families").value,
+    lang: lang,
+    turnstile_token: tokenEl ? tokenEl.value : ""
+  };
+
+  try {
+    const res = await fetch("/api/signup", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    let data;
+    try {
+      data = await res.json();
+    } catch {
+      data = { code: "unknown" };
+    }
+
+    if (res.ok) {
+      form.remove();
+      paint({ kind: "done" });
+      status.scrollIntoView({ block: "center", behavior: "smooth" });
+      return;
+    }
+
+    paint({ kind: "error", data, focus: true });
+  } catch {
+    paint({ kind: "error", data: { offline: true } });
+  } finally {
+    submit.disabled = false;
+    submit.textContent = T[lang].submit;
+    try { if (window.turnstile) window.turnstile.reset(); } catch {}
+  }
+});
+
+render();
+</script>
+</body>
+</html>
