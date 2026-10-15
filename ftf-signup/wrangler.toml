@@ -1,0 +1,11 @@
+name = "ftf-signup"
+pages_build_output_dir = "public"
+compatibility_date = "2026-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "ftf-signups"
+database_id = "83427b2a-f9fb-4db4-881c-e1d05ff23064"
+
+# Everything else is set in Pages → Settings → Environment variables, not here,
+# so no secret ever lands in git. See the table in the README.

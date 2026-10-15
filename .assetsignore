@@ -1,0 +1,24 @@
+# Files under the assets directory that must NOT be published as part of the site.
+#
+# wrangler.jsonc serves `directory: "."` — the whole repo — and Workers static
+# assets, unlike Pages, exclude nothing automatically. Without this file every
+# path here is downloadable from feedingtheflocksd.org.
+
+# Version control. /.git/config and /.git/HEAD were being served publicly,
+# which makes the entire commit history cloneable by anyone.
+**/.git
+**/.gitignore
+
+# The signup app. Source, D1 schema, and wrangler.toml (which carries the
+# database_id once filled in). It is a separate deploy — see ftf-signup/README.
+ftf-signup
+
+# Tooling and local cruft.
+**/node_modules
+**/.DS_Store
+.claude
+.wrangler
+
+# Deploy config and repo docs — no reason for these to be public.
+wrangler.jsonc
+README.md
