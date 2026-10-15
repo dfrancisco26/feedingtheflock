@@ -49,7 +49,21 @@ const eventSources = [
   },
 ];
 
-const foodBoxFormUrl = "https://www.signupgenius.com/go/10C0D4DAEAF28AAF9C52-65703393-sepfeeding#/";
+const foodBoxFormUrls = {
+  "2026-10": "https://www.signupgenius.com/go/10C0D4DAEAF28AAF9C52-65704821-october#/",
+  "2026-11": "https://www.signupgenius.com/go/10C0D4DAEAF28AAF9C52-65704993-november",
+  "2026-12": "https://www.signupgenius.com/go/10C0D4DAEAF28AAF9C52-65705116-december",
+};
+
+// Use the sign-up for the next Jamul distribution; fall back to the closest month listed.
+function getFoodBoxFormUrl() {
+  const todayKey = toDateKey(new Date());
+  const jamul = eventSources.find((source) => source.title === "Jamul Distribution Day");
+  const nextDate = jamul.dates.find((date) => date >= todayKey) ?? jamul.dates[jamul.dates.length - 1];
+  const monthKeys = Object.keys(foodBoxFormUrls);
+  const monthKey = nextDate.slice(0, 7);
+  return foodBoxFormUrls[monthKey] ?? foodBoxFormUrls[monthKeys[monthKeys.length - 1]];
+}
 
 const calendarWindow = {
   monthsBack: 0,
@@ -260,7 +274,7 @@ export function initEventsCalendar() {
   const formLinks = document.querySelectorAll("[data-food-box-form-link]");
 
   formLinks.forEach((link) => {
-    link.href = foodBoxFormUrl;
+    link.href = getFoodBoxFormUrl();
   });
 
   if (!calendarTarget && !upcomingTarget) return;
